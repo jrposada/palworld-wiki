@@ -17,10 +17,10 @@ export function createPals(router) {
      * @swagger
      * /pals:
      *  get:
-     *      description: Returns html for the default ExpressJS welcome page.
+     *      description: Returns all Pals.
      *      responses:
      *          200:
-     *              description: html content
+     *              description: List of Pals
      */
     router.post('/pals', apiHandler(handler, validate));
 }
