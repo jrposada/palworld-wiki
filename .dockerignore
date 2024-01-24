@@ -1,0 +1,12 @@
+# Editor
+.vscode
+
+# NodeJS
+.node_modules
+
+# Docker compose files.
+compose.yml
+
+# Doc
+README.md
+

@@ -1,0 +1,17 @@
+services:
+  api:
+    image: api
+    restart: unless-stopped
+    build: .
+    ports:
+      - '${PORT:-3000}:${PORT:-3000}'
+
+  palworld-wiki-db:
+    extends:
+      file: compose-db.yml
+      service: palworld-wiki-db
+
+  pgadmin:
+    extends:
+      file: compose-db.yml
+      service: pgadmin
