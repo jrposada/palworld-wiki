@@ -6,7 +6,6 @@ import express, { json, urlencoded } from 'express';
 import { join } from 'path';
 import swaggerJsdoc from 'swagger-jsdoc';
 import { serve, setup } from 'swagger-ui-express';
-
 import { router } from './routes/index.js';
 
 const app = express();

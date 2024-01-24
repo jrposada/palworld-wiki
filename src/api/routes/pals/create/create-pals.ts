@@ -1,18 +1,23 @@
+import { Router } from 'express';
 import { ApiError } from '../../../helpers/api-error.js';
 import { apiHandler } from '../../../helpers/api-handler.js';
 
-function validate(body) {
-    if (!body.name) {
+type Pal = {
+    name: string;
+};
+
+function validate(pal: Pal) {
+    if (!pal.name) {
         throw new ApiError(400, 'Name is required');
     }
 }
 
-function handler(body) {
-    console.log(body);
-    return { status: 200, data: 'Hello World!' };
+function handler(pal: Pal) {
+    console.log(pal);
+    return { status: 200, data: 'Hello World! 2' };
 }
 
-export function createPals(router) {
+export function createPals(router: Router) {
     /**
      * @swagger
      * /pals:

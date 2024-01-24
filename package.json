@@ -7,12 +7,12 @@
     "url": "https://github.com/jrposada/palworld-wiki.git"
   },
   "scripts": {
+    "dev": "nodemon -w src -x tsx src/api/main.ts",
+    "format": "prettier . --write",
     "lint-staged": "lint-staged",
     "lint:eslint": "eslint .",
     "lint:prettier": "prettier . --check",
     "lint": "npm run lint:eslint && npm run lint:prettier",
-    "format": "prettier . --write",
-    "start:api": "node ./src/api/index.js",
     "start:db": "docker compose --file compose-db.yml up --detach",
     "start": "docker compose --file compose.yml up --detach",
     "stop": "docker compose --file compose.yml stop"
@@ -28,11 +28,21 @@
     "express": "^4.18.2",
     "pg": "^8.11.0",
     "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^4.6.3"
+    "swagger-ui-express": "^4.6.3",
+    "vite-express": "^0.14.0"
   },
   "devDependencies": {
+    "@types/cookie-parser": "^1.4.6",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.11.6",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.6",
     "eslint": "^8.56.0",
     "lint-staged": "^15.2.0",
-    "prettier": "^3.2.4"
+    "nodemon": "^3.0.3",
+    "prettier": "^3.2.4",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.12"
   }
 }
