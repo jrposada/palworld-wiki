@@ -17,7 +17,7 @@ COPY . .
 RUN mv .env.docker .env
 
 # Define entry point.
-CMD ["node", "./src/index.js"]
+CMD ["npm", "run", "run"]
 
 # @see https://docs.docker.com/engine/reference/builder/#expose
 EXPOSE 3000

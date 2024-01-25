@@ -14,8 +14,9 @@ export class PalService {
     constructor() {
         if (
             !process.env.PG_DATABASE ||
-            !process.env.PG_USER ||
-            !process.env.PG_PASSWORD
+            !process.env.PG_HOST ||
+            !process.env.PG_PASSWORD ||
+            !process.env.PG_USER
         ) {
             throw new Error('Missing db connection data');
         }
@@ -23,6 +24,7 @@ export class PalService {
         this.#db = new Postgres({
             database: process.env.PG_DATABASE,
             user: process.env.PG_USER,
+            host: process.env.PG_HOST,
             password: process.env.PG_PASSWORD,
             entities: {
                 pal: { definition: palDao, mapper: PAL_DAO_MAPPER },

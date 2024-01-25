@@ -18,13 +18,14 @@ export class Postgres<TEntityType extends string> {
     constructor(
         private readonly config: {
             database: string;
+            entities: Record<TEntityType, EntityConfig>;
+            host: string;
             password: string;
             user: string;
-            entities: Record<TEntityType, EntityConfig>;
         },
     ) {
         this.#client = new Sequelize(
-            `postgres://${this.config.user}:${this.config.password}@localhost:5432/${this.config.database}`,
+            `postgres://${this.config.user}:${this.config.password}@${this.config.host}:5432/${this.config.database}`,
         );
 
         this.#entities = Object.entries<EntityConfig>(config.entities).reduce<
