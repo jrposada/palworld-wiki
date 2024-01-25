@@ -40,10 +40,11 @@ export class Postgres<TEntityType extends string> {
 
     async connect() {
         try {
-            console.log('connect');
             await this.#client.authenticate();
             await this.#client.sync();
-            console.log('Connection has been established successfully.');
+            console.log(
+                'Connection with database has been established successfully.',
+            );
         } catch (error) {
             console.error('Unable to connect to the database:', error);
             throw error;
@@ -76,7 +77,6 @@ export class Postgres<TEntityType extends string> {
                 return;
             }
 
-            console.log({ type: typeof filter.value, field: filter.field });
             dbQuery.where[dbField] = filter.value;
         });
 
