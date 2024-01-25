@@ -5,15 +5,21 @@ import { sendError } from './send-error.js';
 import { sendSuccess } from './send-success.js';
 
 export function apiHandler<TData, TResponseData>(
-    handler: (data: TData) => ApiResponseData<TResponseData>,
-    validate: (data: TData) => void,
+    handler: (
+        data: TData,
+    ) =>
+        | Promise<ApiResponseData<TResponseData>>
+        | ApiResponseData<TResponseData>,
+    validate?: (data: TData) => void,
 ) {
     return async function (request: Request, response: Response) {
         try {
-            validate(request.body);
+            validate?.(request.body);
             const result = await handler(request.body);
             sendSuccess(response, result);
         } catch (error) {
+            console.log(error);
+
             if (error instanceof ApiError) {
                 sendError(response, error);
                 return;
