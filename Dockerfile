@@ -16,6 +16,8 @@ COPY . .
 # version instead of the dev one.
 RUN mv .env.docker .env
 
+RUN npm run build
+
 # Define entry point.
 CMD ["npm", "run", "run"]
 

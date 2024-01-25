@@ -7,6 +7,7 @@
     "url": "https://github.com/jrposada/palworld-wiki.git"
   },
   "scripts": {
+    "build": "vite build",
     "dev": "nodemon -w src/server -x tsx src/server/main.ts",
     "format": "prettier . --write",
     "lint-staged": "lint-staged",
@@ -15,7 +16,7 @@
     "lint": "npm run lint:eslint && npm run lint:prettier",
     "run": "NODE_ENV=production tsx src/server/main.ts",
     "start:db": "docker compose --file compose-db.yml up --detach",
-    "start": "docker compose --file compose.yml up --build",
+    "start": "docker compose --file compose.yml up --build --detach",
     "stop": "docker compose --file compose.yml stop"
   },
   "author": {
