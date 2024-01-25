@@ -1,5 +1,5 @@
 import { Model, ModelStatic, Optional, Sequelize } from 'sequelize';
-import { Query } from '../../models/query.js';
+import { Query } from '../../../models/query.js';
 
 type EntityConfig = {
     definition: (sequelize: Sequelize) => ModelStatic<Model>;

@@ -1,7 +1,7 @@
 import { Request, Router } from 'express';
-import { Pal } from '../../../../models/pal.js';
+import { Pal } from '../../../../../models/pal.js';
+import { isDefined } from '../../../../../utils/is-defined.js';
 import { PalService } from '../../../../services/pal-service.js';
-import { isDefined } from '../../../../utils/is-defined.js';
 import { ApiError } from '../../../helpers/api-error.js';
 import { apiHandler } from '../../../helpers/api-handler.js';
 

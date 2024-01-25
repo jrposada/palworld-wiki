@@ -1,6 +1,6 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
-import { Entity } from '../../models/entity.js';
-import { Pal, PalEntity } from '../../models/pal.js';
+import { Entity } from '../../../models/entity.js';
+import { Pal, PalEntity } from '../../../models/pal.js';
 
 type PalDao = {
     abilitiesCooling: number;

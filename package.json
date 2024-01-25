@@ -7,7 +7,7 @@
     "url": "https://github.com/jrposada/palworld-wiki.git"
   },
   "scripts": {
-    "dev": "nodemon -w src -x tsx src/api/main.ts",
+    "dev": "nodemon -w src/server -x tsx src/server/main.ts",
     "format": "prettier . --write",
     "lint-staged": "lint-staged",
     "lint:eslint": "eslint .",

@@ -1,5 +1,5 @@
 import { Request, Router } from 'express';
-import { Query } from '../../../../models/query.js';
+import { Query } from '../../../../../models/query.js';
 import { PalService } from '../../../../services/pal-service.js';
 import { apiHandler } from '../../../helpers/api-handler.js';
 

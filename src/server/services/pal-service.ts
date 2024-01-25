@@ -1,3 +1,5 @@
+import { Pal, PalEntity } from '../../models/pal.js';
+import { Query } from '../../models/query.js';
 import {
     PAL_DAO_MAPPER,
     palDao,
@@ -5,8 +7,6 @@ import {
     toPalEntity,
 } from '../infrastructure/data/pal-dao.js';
 import { Postgres } from '../infrastructure/data/postgres.js';
-import { Pal, PalEntity } from '../models/pal.js';
-import { Query } from '../models/query.js';
 
 export class PalService {
     readonly #db: Postgres<'pal'>;
