@@ -1,22 +1,41 @@
-import { Model, Optional, Sequelize } from 'sequelize';
-import { palDao } from './pal-dao.js';
+import { Model, ModelStatic, Optional, Sequelize } from 'sequelize';
+import { Query } from '../../models/query.js';
 
-export class Postgres {
+type EntityConfig = {
+    definition: (sequelize: Sequelize) => ModelStatic<Model>;
+    mapper: Record<string, string>;
+};
+
+type Entities<TEntityType extends string> = Record<
+    TEntityType,
+    { dao: ModelStatic<Model>; mapper: EntityConfig['mapper'] }
+>;
+
+export class Postgres<TEntityType extends string> {
     readonly #client: Sequelize;
-    readonly #palDao;
+    readonly #entities: Readonly<Entities<TEntityType>>;
 
     constructor(
         private readonly config: {
             database: string;
             password: string;
             user: string;
+            entities: Record<TEntityType, EntityConfig>;
         },
     ) {
         this.#client = new Sequelize(
             `postgres://${this.config.user}:${this.config.password}@localhost:5432/${this.config.database}`,
         );
 
-        this.#palDao = palDao(this.#client);
+        this.#entities = Object.entries<EntityConfig>(config.entities).reduce<
+            Entities<TEntityType>
+        >(
+            (acc, [key, { definition, mapper }]) => ({
+                ...acc,
+                [key as TEntityType]: { dao: definition(this.#client), mapper },
+            }),
+            {} as Entities<TEntityType>,
+        );
     }
 
     async connect() {
@@ -32,9 +51,36 @@ export class Postgres {
     }
 
     async create<TData extends Optional<any, string> | undefined>(
+        type: TEntityType,
         dao: TData,
     ): Promise<Model> {
-        const dbData = await this.#palDao.create(dao);
+        const dbData = await this.#entities[type].dao.create(dao);
+        return dbData;
+    }
+
+    async query(type: TEntityType, query: Query): Promise<Model[]> {
+        const entity = this.#entities[type];
+
+        const dbQuery: {
+            where: Record<string | number | symbol, string | number>;
+        } = {
+            where: {},
+        };
+        query.filters.forEach((filter) => {
+            const dbField = entity.mapper[filter.field];
+            if (!dbField) {
+                console.warn('Unknown filter', {
+                    field: filter.field,
+                    dbField,
+                });
+                return;
+            }
+
+            console.log({ type: typeof filter.value, field: filter.field });
+            dbQuery.where[dbField] = filter.value;
+        });
+
+        const dbData = await entity.dao.findAll(dbQuery);
         return dbData;
     }
 }

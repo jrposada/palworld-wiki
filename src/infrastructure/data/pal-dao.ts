@@ -66,8 +66,8 @@ export function toPalDao(pal: Pal): PalDao {
 
 export function toPalEntity(model: Model): PalEntity {
     const palDao = model.toJSON<PalDao & Entity>();
-    return new PalEntity(
-        {
+    return {
+        abilities: {
             cooling: palDao.abilitiesCooling,
             farming: palDao.abilitiesFarming,
             gathering: palDao.abilitiesGathering,
@@ -81,11 +81,34 @@ export function toPalEntity(model: Model): PalEntity {
             transporting: palDao.abilitiesTransporting,
             watering: palDao.abilitiesWatering,
         },
-        palDao.createdAt,
-        palDao.food,
-        palDao.id,
-        palDao.index,
-        palDao.name,
-        palDao.updatedAt,
-    );
+        createdAt: palDao.createdAt,
+        food: palDao.food,
+        id: palDao.id,
+        index: palDao.index,
+        name: palDao.name,
+        updatedAt: palDao.updatedAt,
+    };
 }
+
+export const PAL_DAO_MAPPER: Partial<
+    Record<ObjectKeyPaths<PalEntity>, keyof (PalDao & Entity)>
+> = {
+    'abilities.cooling': 'abilitiesCooling',
+    'abilities.farming': 'abilitiesFarming',
+    'abilities.gathering': 'abilitiesGathering',
+    'abilities.generatingElectricity': 'abilitiesGeneratingElectricity',
+    'abilities.handiwork': 'abilitiesHandiwork',
+    'abilities.kindling': 'abilitiesKindling',
+    'abilities.lumbering': 'abilitiesLumbering',
+    'abilities.medicineProduction': 'abilitiesMedicineProduction',
+    'abilities.mining': 'abilitiesMining',
+    'abilities.planting': 'abilitiesPlanting',
+    'abilities.transporting': 'abilitiesTransporting',
+    'abilities.watering': 'abilitiesWatering',
+    createdAt: 'createdAt',
+    food: 'food',
+    id: 'id',
+    index: 'index',
+    name: 'name',
+    updatedAt: 'updatedAt',
+};

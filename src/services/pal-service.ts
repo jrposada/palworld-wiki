@@ -1,9 +1,15 @@
-import { toPalDao, toPalEntity } from '../infrastructure/data/pal-dao.js';
+import {
+    PAL_DAO_MAPPER,
+    palDao,
+    toPalDao,
+    toPalEntity,
+} from '../infrastructure/data/pal-dao.js';
 import { Postgres } from '../infrastructure/data/postgres.js';
 import { Pal, PalEntity } from '../models/pal.js';
+import { Query } from '../models/query.js';
 
 export class PalService {
-    #db: Postgres;
+    readonly #db: Postgres<'pal'>;
 
     constructor() {
         if (
@@ -18,6 +24,9 @@ export class PalService {
             database: process.env.PG_DATABASE,
             user: process.env.PG_USER,
             password: process.env.PG_PASSWORD,
+            entities: {
+                pal: { definition: palDao, mapper: PAL_DAO_MAPPER },
+            },
         });
     }
 
@@ -27,8 +36,15 @@ export class PalService {
 
     async create(pal: Pal): Promise<PalEntity> {
         const dao = toPalDao(pal);
-        const dbData = await this.#db.create(dao);
+        const dbData = await this.#db.create('pal', dao);
         const data = toPalEntity(dbData);
+
+        return data;
+    }
+
+    async get(query: Query): Promise<PalEntity[]> {
+        const dbData = await this.#db.query('pal', query);
+        const data = dbData.map((item) => toPalEntity(item));
 
         return data;
     }

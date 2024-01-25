@@ -1,11 +1,14 @@
-import { Router } from 'express';
+import { Request, Router } from 'express';
 import { Pal } from '../../../../models/pal.js';
 import { PalService } from '../../../../services/pal-service.js';
 import { isDefined } from '../../../../utils/is-defined.js';
 import { ApiError } from '../../../helpers/api-error.js';
 import { apiHandler } from '../../../helpers/api-handler.js';
 
-function validate(pal: Pal) {
+function validate(
+    _query: Request['query'],
+    pal: Pal,
+): { data: Pal; query: undefined } {
     if (
         !isDefined(pal.abilities) ||
         !isDefined(pal.abilities.cooling) ||
@@ -26,9 +29,32 @@ function validate(pal: Pal) {
         console.log('Invalid pal:', { pal });
         throw new ApiError(400, 'Invalid data');
     }
+
+    return {
+        data: {
+            abilities: {
+                cooling: pal.abilities.cooling,
+                farming: pal.abilities.farming,
+                gathering: pal.abilities.gathering,
+                generatingElectricity: pal.abilities.generatingElectricity,
+                handiwork: pal.abilities.handiwork,
+                kindling: pal.abilities.kindling,
+                lumbering: pal.abilities.lumbering,
+                medicineProduction: pal.abilities.medicineProduction,
+                mining: pal.abilities.mining,
+                planting: pal.abilities.planting,
+                transporting: pal.abilities.transporting,
+                watering: pal.abilities.watering,
+            },
+            food: pal.food,
+            index: pal.index,
+            name: pal.name,
+        },
+        query: undefined,
+    };
 }
 
-async function handler(pal: Pal) {
+async function handler(_query: undefined, pal: Pal) {
     const service = new PalService();
     await service.initialize();
 

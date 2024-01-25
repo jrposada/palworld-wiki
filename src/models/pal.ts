@@ -1,27 +1,19 @@
 import { Entity } from './entity.js';
 
-export class Pal {
-    constructor(
-        readonly abilities: Abilities,
-        readonly food: number,
-        readonly index: number,
-        readonly name: string,
-    ) {}
-}
+export type Pal = {
+    abilities: Abilities;
+    food: number;
+    index: number;
+    name: string;
+};
 
-export class PalEntity extends Pal implements Entity {
-    constructor(
-        readonly abilities: Abilities,
-        readonly createdAt: Date,
-        readonly food: number,
-        readonly id: number,
-        readonly index: number,
-        readonly name: string,
-        readonly updatedAt: Date,
-    ) {
-        super(abilities, food, index, name);
-    }
-}
+export type PalEntity = Pal &
+    Entity & {
+        abilities: Abilities;
+        food: number;
+        index: number;
+        name: string;
+    };
 
 export type Abilities = {
     cooling: number;
