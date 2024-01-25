@@ -1,6 +1,6 @@
-import { toPal, toPalDao } from '../infrastructure/data/pal-dao.js';
+import { toPalDao, toPalEntity } from '../infrastructure/data/pal-dao.js';
 import { Postgres } from '../infrastructure/data/postgres.js';
-import { Pal } from '../models/pal.js';
+import { Pal, PalEntity } from '../models/pal.js';
 
 export class PalService {
     #db: Postgres;
@@ -25,11 +25,11 @@ export class PalService {
         await this.#db.connect();
     }
 
-    async create(pal: Pal): Promise<{ isNew: boolean; data: Pal }> {
+    async create(pal: Pal): Promise<PalEntity> {
         const dao = toPalDao(pal);
         const dbData = await this.#db.create(dao);
-        const data = toPal(dbData);
+        const data = toPalEntity(dbData);
 
-        return { isNew: dbData.isNewRecord, data };
+        return data;
     }
 }

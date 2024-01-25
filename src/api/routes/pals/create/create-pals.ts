@@ -32,20 +32,20 @@ async function handler(pal: Pal) {
     const service = new PalService();
     await service.initialize();
 
-    const { isNew, data } = await service.create(pal);
+    const data = await service.create(pal);
 
-    return { status: isNew ? 201 : 200, data };
+    return { status: 201, data };
 }
 
 export function createPals(router: Router) {
     /**
      * @swagger
      * /pals:
-     *  put:
+     *  post:
      *      description: Returns all Pals.
      *      responses:
      *          200:
      *              description: List of Pals
      */
-    router.put('/pals', apiHandler(handler, validate));
+    router.post('/pals', apiHandler(handler, validate));
 }

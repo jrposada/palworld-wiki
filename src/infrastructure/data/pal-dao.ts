@@ -1,5 +1,6 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
-import { Pal } from '../../models/pal.js';
+import { Entity } from '../../models/entity.js';
+import { Pal, PalEntity } from '../../models/pal.js';
 
 type PalDao = {
     abilitiesCooling: number;
@@ -63,9 +64,9 @@ export function toPalDao(pal: Pal): PalDao {
     };
 }
 
-export function toPal(model: Model): Pal {
-    const palDao = model.toJSON<PalDao>();
-    return new Pal(
+export function toPalEntity(model: Model): PalEntity {
+    const palDao = model.toJSON<PalDao & Entity>();
+    return new PalEntity(
         {
             cooling: palDao.abilitiesCooling,
             farming: palDao.abilitiesFarming,
@@ -80,8 +81,11 @@ export function toPal(model: Model): Pal {
             transporting: palDao.abilitiesTransporting,
             watering: palDao.abilitiesWatering,
         },
+        palDao.createdAt,
         palDao.food,
+        palDao.id,
         palDao.index,
         palDao.name,
+        palDao.updatedAt,
     );
 }
