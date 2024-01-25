@@ -4,7 +4,7 @@ services:
     restart: unless-stopped
     build: .
     ports:
-      - '${PORT:-3000}:${PORT:-3000}'
+      - '${PORT}:${PORT}'
 
   palworld-wiki-db:
     extends:
