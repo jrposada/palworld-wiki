@@ -2,12 +2,11 @@
 
 ## Requirements
 
--   Docker.
+-   [Docker](https://www.docker.com/).
 
 ## Local development
 
-1. Start DB container: `npm run start:db`
-2. Launch local server: `npm run dev`
+1. Launch local server: `npm run dev`
 
 ### Connect to database
 
