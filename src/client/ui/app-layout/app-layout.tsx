@@ -9,12 +9,22 @@ import {
     Toolbar,
     Typography,
 } from '@mui/material';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Outlet } from '@tanstack/react-router';
-import { TanStackRouterDevtools } from '@tanstack/router-devtools';
-import React from 'react';
+import React, { Suspense } from 'react';
 import AppBar from './app-bar';
 import AppDrawer from './app-drawer';
 import { navigationItems } from './navigation-items';
+
+// Only load router dev tools in development mode.
+const TanStackRouterDevtools =
+    process.env.NODE_ENV === 'production'
+        ? () => null
+        : React.lazy(() =>
+              import('@tanstack/router-devtools').then((res) => ({
+                  default: res.TanStackRouterDevtools,
+              })),
+          );
 
 const AppLayout: React.FunctionComponent = () => {
     const [open, setOpen] = React.useState(true);
@@ -84,7 +94,10 @@ const AppLayout: React.FunctionComponent = () => {
                 <Toolbar />
                 <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
                     <Outlet />
-                    <TanStackRouterDevtools />
+                    <Suspense>
+                        <TanStackRouterDevtools />
+                    </Suspense>
+                    <ReactQueryDevtools />
                 </Container>
             </Box>
         </Box>

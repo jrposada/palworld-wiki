@@ -1,7 +1,12 @@
 import { Grid, Paper } from '@mui/material';
 import { FunctionComponent } from 'react';
+import { useGetPals } from '../core/api/get-pals/get-pals';
 
 const HomeRoute: FunctionComponent = () => {
+    const { data } = useGetPals();
+
+    console.log(data);
+
     return (
         <Grid container spacing={3}>
             {/* Chart */}
