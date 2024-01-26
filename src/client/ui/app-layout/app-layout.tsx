@@ -4,13 +4,13 @@ import {
     Box,
     Container,
     Divider,
-    Grid,
     IconButton,
     List,
-    Paper,
     Toolbar,
     Typography,
 } from '@mui/material';
+import { Outlet } from '@tanstack/react-router';
+import { TanStackRouterDevtools } from '@tanstack/router-devtools';
 import React from 'react';
 import AppBar from './app-bar';
 import AppDrawer from './app-drawer';
@@ -83,46 +83,8 @@ const AppLayout: React.FunctionComponent = () => {
             >
                 <Toolbar />
                 <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-                    <Grid container spacing={3}>
-                        {/* Chart */}
-                        <Grid item xs={12} md={8} lg={9}>
-                            <Paper
-                                sx={{
-                                    p: 2,
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    height: 240,
-                                }}
-                            >
-                                a
-                            </Paper>
-                        </Grid>
-                        {/* Recent Deposits */}
-                        <Grid item xs={12} md={4} lg={3}>
-                            <Paper
-                                sx={{
-                                    p: 2,
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    height: 240,
-                                }}
-                            >
-                                a
-                            </Paper>
-                        </Grid>
-                        {/* Recent Orders */}
-                        <Grid item xs={12}>
-                            <Paper
-                                sx={{
-                                    p: 2,
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                }}
-                            >
-                                a
-                            </Paper>
-                        </Grid>
-                    </Grid>
+                    <Outlet />
+                    <TanStackRouterDevtools />
                 </Container>
             </Box>
         </Box>
