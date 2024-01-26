@@ -1,7 +1,10 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "module": "ESNext",
-    "moduleResolution": "Bundler"
-  }
+    "module": "ES2020",
+
+    /* Bundler mode */
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+  },
 }
