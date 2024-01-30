@@ -11,7 +11,7 @@ services:
       file: compose-db.yml
       service: palworld-wiki-db
 
-  pgadmin:
+  pgadmin4:
     extends:
       file: compose-db.yml
-      service: pgadmin
+      service: pgadmin4

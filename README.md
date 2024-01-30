@@ -22,3 +22,10 @@
         2. Port: `5432`
         3. Username: `admin`
         4. Password: `changeme`
+
+## How to deploy
+
+1. Start ssh session into Raspberry PI.
+2. Navigate to local repository.
+3. Pull latest files.
+4. Run `npm run start`
