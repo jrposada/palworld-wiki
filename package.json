@@ -15,7 +15,9 @@
     "lint:prettier": "prettier . --check",
     "lint": "npm run lint:eslint && npm run lint:prettier",
     "run": "NODE_ENV=production tsx src/server/main.ts",
-    "start:db": "docker compose --file compose-db.yml up --detach",
+    "deploy:start": "docker compose --file compose.prod.yml up --build --detach",
+    "deploy:stop": "docker compose --file compose.prod.yml stop",
+    "start:db": "docker compose --file compose.db.yml up --detach",
     "start": "docker compose --file compose.yml up --build --detach",
     "stop": "docker compose --file compose.yml stop"
   },

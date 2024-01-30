@@ -1,8 +1,7 @@
 services:
   palworld-wiki-service:
-    image: palworld-wiki-service
+    image: jrposada/palworld-wiki
     restart: unless-stopped
-    build: .
     ports:
       - '${PORT}:${PORT}'
 

@@ -13,7 +13,8 @@ node_modules
 
 # Docker compose files.
 .dockerignore
-compose-db.yml
+compose.db.yml
+compose.prod.yml
 compose.yml
 Dockerfile
 

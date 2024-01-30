@@ -25,7 +25,15 @@
 
 ## How to deploy
 
-1. Start ssh session into Raspberry PI.
-2. Navigate to local repository.
-3. Pull latest files.
-4. Run `npm run start`
+1. Push new docker image
+
+    ```
+    docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t jrposada/palworld-wiki:latest --push .
+    ```
+
+1. SSH into Raspberry:
+
+    ```
+    git pull
+    npm run deploy:start
+    ```

@@ -9,14 +9,13 @@ services:
     ports:
       - '${PG_PORT}:5432' # Map port 5432 in the container to port 5432 on the Docker host.
 
-
-  # pgadmin4:
-  #   image: jrposada/pgadmin4
-  #   depends_on:
-  #     - palworld-wiki-db
-  #   restart: unless-stopped
-  #   environment:
-  #     PGADMIN_DEFAULT_EMAIL: ${PG_ADMIN_DEFAULT_EMAIL}
-  #     PGADMIN_DEFAULT_PASSWORD: ${PG_ADMIN_DEFAULT_PASSWORD}
-  #   ports:
-  #     - '${PG_ADMIN_PORT}:80'
+  pgadmin4:
+    image: dpage/pgadmin4
+    depends_on:
+      - palworld-wiki-db
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PG_ADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PG_ADMIN_DEFAULT_PASSWORD}
+    ports:
+      - '${PG_ADMIN_PORT}:80'
