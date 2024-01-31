@@ -1,6 +1,6 @@
 {
   "name": "palworld-wiki",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "private": true,
   "repository": {
     "type": "git",
@@ -14,10 +14,9 @@
     "lint:eslint": "eslint .",
     "lint:prettier": "prettier . --check",
     "lint": "npm run lint:eslint && npm run lint:prettier",
-    "run": "NODE_ENV=production tsx src/server/main.ts",
-    "deploy:start": "docker compose --file compose.prod.yml up --build --detach",
-    "deploy:stop": "docker compose --file compose.prod.yml stop",
+    "publish": "./scripts/publish.sh",
     "start:db": "docker compose --file compose.db.yml up --detach",
+    "start:server": "NODE_ENV=production tsx src/server/main.ts",
     "start": "docker compose --file compose.yml up --build --detach",
     "stop": "docker compose --file compose.yml stop"
   },

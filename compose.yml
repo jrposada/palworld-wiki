@@ -1,17 +1,26 @@
 services:
-  palworld-wiki-service:
-    image: palworld-wiki-service
+  palworld_wiki_service:
+    image: jrposada/palworld-wiki:latest
     restart: unless-stopped
-    build: .
+    volumes:
+      - service_data:/app/data
     ports:
       - '${PORT}:${PORT}'
 
-  palworld-wiki-db:
+  palworld_wiki_db:
     extends:
       file: compose.db.yml
-      service: palworld-wiki-db
+      service: palworld_wiki_db
 
   pgadmin4:
     extends:
       file: compose.db.yml
       service: pgadmin4
+
+volumes:
+  service_data:
+    external: false
+  pgadmin4_data:
+    external: false
+  postgres_data:
+    external: false
