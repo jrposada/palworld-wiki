@@ -1,5 +1,24 @@
 {
   "translation": {
-    "home": "Home"
+    "home": "Home",
+    "pal": {
+      "ability": {
+        "cooling": "Cooling",
+        "farming": "Farming",
+        "gathering": "Gathering",
+        "generatingElectricity": "Generating Electricity",
+        "handiwork": "Handiwork",
+        "kindling": "Kindling",
+        "lumbering": "Lumbering",
+        "medicineProduction": "MedicineProduction",
+        "mining": "Mining",
+        "planting": "Planting",
+        "transporting": "Transporting",
+        "watering": "Watering"
+      },
+      "filter": {
+        "ability": "Work Suitability"
+      }
+    }
   }
 }
