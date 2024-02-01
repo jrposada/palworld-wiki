@@ -4,6 +4,8 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import { RouterProvider, createRouter } from '@tanstack/react-router';
+import 'ag-grid-community/styles/ag-grid.css'; // Core CSS
+import 'ag-grid-community/styles/ag-theme-quartz.css'; // Theme
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { rootRoute } from './root-route.tsx';

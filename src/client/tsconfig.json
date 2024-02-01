@@ -7,4 +7,5 @@
     "moduleResolution": "Bundler",
     "jsx": "react-jsx",
   },
+  "exclude": [],
 }

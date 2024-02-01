@@ -1,13 +1,13 @@
-import * as dotenv from 'dotenv';
-dotenv.config();
-
 import cookieParser from 'cookie-parser';
+import * as dotenv from 'dotenv';
 import express, { json, urlencoded } from 'express';
 import { join } from 'path';
 import swaggerJsdoc from 'swagger-jsdoc';
 import { serve, setup } from 'swagger-ui-express';
 import ViteExpress from 'vite-express';
 import { router } from './api/routes/index.js';
+
+dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;

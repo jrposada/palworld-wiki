@@ -59,7 +59,7 @@ const AppLayout: React.FunctionComponent = () => {
                         noWrap
                         sx={{ flexGrow: 1 }}
                     >
-                        Dashboard
+                        Home
                     </Typography>
                 </Toolbar>
             </AppBar>

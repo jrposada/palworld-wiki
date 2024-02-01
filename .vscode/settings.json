@@ -3,5 +3,6 @@
   "editor.codeActionsOnSave": {
     "source.organizeImports": "explicit"
   },
-  "cSpell.words": ["palworld"]
+  "cSpell.words": ["palworld"],
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

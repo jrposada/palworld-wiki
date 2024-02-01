@@ -2,8 +2,9 @@ module.exports = {
     env: {
         node: true,
         es2020: true,
+        browser: true,
     },
-    extends: 'eslint:recommended',
+    extends: ['eslint:recommended', 'react-app', 'react-app/jest'],
     overrides: [
         {
             env: {
@@ -18,11 +19,15 @@ module.exports = {
     parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
+        ecmaFeatures: {
+            jsx: true, // Enable JSX parsing
+        },
     },
     rules: {
-        indent: ['error', 4],
         'linebreak-style': ['error', 'unix'],
         quotes: ['error', 'single'],
         semi: ['error', 'always'],
+        'react/jsx-uses-react': 'error', // Enable React-specific linting rules
+        'react/jsx-uses-vars': 'error',
     },
 };
