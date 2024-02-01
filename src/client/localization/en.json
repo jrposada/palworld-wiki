@@ -18,6 +18,12 @@
       },
       "filter": {
         "ability": "Work Suitability"
+      },
+      "table": {
+        "header": {
+          "index": "No.",
+          "name": "Name"
+        }
       }
     }
   }
