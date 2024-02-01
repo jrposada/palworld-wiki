@@ -3,13 +3,17 @@ import { AgGridReact, AgGridReactProps } from 'ag-grid-react';
 import { t } from 'i18next';
 import { FunctionComponent, useState } from 'react';
 import { Pal } from '../../../../models/pal';
-import PalsFilter from '../pals-filter/pals-filter';
+import PalsFilter, { PalsFilterProps } from '../pals-filter/pals-filter';
 
 type PalsTableProps = {
     pals: Pal[] | undefined;
+    onFilterChange: PalsFilterProps['onChange'];
 };
 
-const PalsTable: FunctionComponent<PalsTableProps> = ({ pals }) => {
+const PalsTable: FunctionComponent<PalsTableProps> = ({
+    pals,
+    onFilterChange,
+}) => {
     const [colDefs] = useState<AgGridReactProps<Pal>['columnDefs']>([
         { field: 'index', headerName: t('pal.table.header.index') },
         { field: 'name', headerName: t('pal.table.header.name') },
@@ -48,7 +52,7 @@ const PalsTable: FunctionComponent<PalsTableProps> = ({ pals }) => {
     return (
         <Grid container spacing={3}>
             <Grid item xs={12}>
-                <PalsFilter />
+                <PalsFilter onChange={onFilterChange} />
             </Grid>
             <Grid item xs={12}>
                 <div className="ag-theme-quartz" style={{ height: 500 }}>

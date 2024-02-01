@@ -3,7 +3,12 @@ import { FunctionComponent } from 'react';
 import PalsAbilityFilter from './pals-ability-filter';
 import PalsDropFilter from './pals-drop-filter';
 
-const PalsFilter: FunctionComponent = () => {
+type PalsFilterProps = {
+    onChange: () => void;
+};
+
+const PalsFilter: FunctionComponent<PalsFilterProps> = () => {
+    // TODO: onChange
     return (
         <Grid container spacing={2}>
             <Grid item>
@@ -15,4 +20,6 @@ const PalsFilter: FunctionComponent = () => {
         </Grid>
     );
 };
+
 export default PalsFilter;
+export type { PalsFilterProps };

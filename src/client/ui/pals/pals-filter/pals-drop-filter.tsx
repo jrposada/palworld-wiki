@@ -1,98 +1,45 @@
-import {
-    Button,
-    Checkbox,
-    FormControlLabel,
-    FormControlLabelProps,
-    Menu,
-    MenuItem,
-} from '@mui/material';
 import { t } from 'i18next';
-import React, { FunctionComponent, useState } from 'react';
+import { useMemo, useState } from 'react';
+import PalsFilterButton, {
+    PalsFilterButtonProps,
+} from '../pals-filter-button/pals-filter-button';
 
-const PalsDropFilter: FunctionComponent = () => {
+type Option = 'bone' | 'innovativeTechnicalManual' | 'largePalSoul';
+
+function PalsDropFilter() {
+    const id = 'pal-drop-filter-button';
+
     const [{ bone, innovativeTechnicalManual, largePalSoul }, setState] =
         useState({
             bone: false,
             innovativeTechnicalManual: false,
             largePalSoul: false,
         });
-    const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
-    const handleClick: React.MouseEventHandler<HTMLButtonElement> = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
-    const handleChange: React.ChangeEventHandler<HTMLInputElement> = (
-        event,
-    ) => {
-        setState((prev) => ({
-            ...prev,
-            [event.target.name]: event.target.checked,
-        }));
-    };
-
-    const nameId = 'pal-drop-filter-button';
-    const open = Boolean(anchorEl);
+    const options = useMemo<PalsFilterButtonProps<Option>['options']>(
+        () => [
+            { name: 'bone', value: bone, label: t('pal.drop.bone') },
+            {
+                name: 'innovativeTechnicalManual',
+                value: innovativeTechnicalManual,
+                label: t('pal.drop.innovativeTechnicalManual'),
+            },
+            {
+                name: 'largePalSoul',
+                value: largePalSoul,
+                label: t('pal.drop.largePalSoul'),
+            },
+        ],
+        [bone, innovativeTechnicalManual, largePalSoul],
+    );
 
     return (
-        <>
-            <Button
-                id={nameId}
-                variant="contained"
-                aria-controls={open ? 'basic-menu' : undefined}
-                aria-haspopup="true"
-                aria-expanded={open ? 'true' : undefined}
-                onClick={handleClick}
-            >
-                {t('pal.filter.drop')}
-            </Button>
-            <Menu
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                MenuListProps={{
-                    'aria-labelledby': nameId,
-                }}
-            >
-                <MenuItem>
-                    <FormControlLabel
-                        name="bone"
-                        checked={bone}
-                        onChange={
-                            handleChange as unknown as FormControlLabelProps['onChange']
-                        }
-                        control={<Checkbox />}
-                        label={t('pal.drop.bone')}
-                    />
-                </MenuItem>
-                <MenuItem>
-                    <FormControlLabel
-                        name="innovativeTechnicalManual"
-                        checked={innovativeTechnicalManual}
-                        onChange={
-                            handleChange as unknown as FormControlLabelProps['onChange']
-                        }
-                        control={<Checkbox />}
-                        label={t('pal.drop.innovativeTechnicalManual')}
-                    />
-                </MenuItem>
-                <MenuItem>
-                    <FormControlLabel
-                        name="largePalSoul"
-                        checked={largePalSoul}
-                        onChange={
-                            handleChange as unknown as FormControlLabelProps['onChange']
-                        }
-                        control={<Checkbox />}
-                        label={t('pal.drop.largePalSoul')}
-                    />
-                </MenuItem>
-            </Menu>
-        </>
+        <PalsFilterButton<Option>
+            id={id}
+            label={t('pal.filter.drop')}
+            options={options}
+            onChange={setState}
+        />
     );
-};
+}
 export default PalsDropFilter;
