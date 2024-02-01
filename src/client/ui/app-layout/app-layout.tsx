@@ -11,7 +11,8 @@ import {
 } from '@mui/material';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Outlet } from '@tanstack/react-router';
-import React, { Suspense } from 'react';
+import { t } from 'i18next';
+import { Suspense, lazy, useState } from 'react';
 import AppBar from './app-bar';
 import AppDrawer from './app-drawer';
 import { navigationItems } from './navigation-items';
@@ -20,14 +21,14 @@ import { navigationItems } from './navigation-items';
 const TanStackRouterDevtools =
     process.env.NODE_ENV === 'production'
         ? () => null
-        : React.lazy(() =>
+        : lazy(() =>
               import('@tanstack/router-devtools').then((res) => ({
                   default: res.TanStackRouterDevtools,
               })),
           );
 
 const AppLayout: React.FunctionComponent = () => {
-    const [open, setOpen] = React.useState(true);
+    const [open, setOpen] = useState(true);
     const toggleDrawer = () => {
         setOpen(!open);
     };
@@ -59,7 +60,7 @@ const AppLayout: React.FunctionComponent = () => {
                         noWrap
                         sx={{ flexGrow: 1 }}
                     >
-                        Home
+                        {t('home')}
                     </Typography>
                 </Toolbar>
             </AppBar>

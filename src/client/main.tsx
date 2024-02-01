@@ -8,6 +8,7 @@ import 'ag-grid-community/styles/ag-grid.css'; // Core CSS
 import 'ag-grid-community/styles/ag-theme-quartz.css'; // Theme
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import './i18n';
 import { rootRoute } from './root-route.tsx';
 import { routes } from './routes/routes.tsx';
 
