@@ -5,7 +5,7 @@ import PalsFilter from '../ui/pals/pals-filter/pals-filter';
 import PalsTable from '../ui/pals/pals-table/pals-table';
 
 const HomeRoute: FunctionComponent = () => {
-    const { data, isLoading } = useGetPals();
+    const { data } = useGetPals();
 
     console.log(data);
 
@@ -15,7 +15,7 @@ const HomeRoute: FunctionComponent = () => {
                 <PalsFilter />
             </Grid>
             <Grid item xs={12}>
-                <PalsTable pals={data} loading={isLoading} />
+                <PalsTable pals={data} />
             </Grid>
         </Grid>
     );
