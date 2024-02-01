@@ -1,7 +1,9 @@
+import { Grid } from '@mui/material';
 import { AgGridReact, AgGridReactProps } from 'ag-grid-react';
 import { t } from 'i18next';
 import { FunctionComponent, useState } from 'react';
 import { Pal } from '../../../../models/pal';
+import PalsFilter from '../pals-filter/pals-filter';
 
 type PalsTableProps = {
     pals: Pal[] | undefined;
@@ -44,9 +46,16 @@ const PalsTable: FunctionComponent<PalsTableProps> = ({ pals }) => {
     ]);
 
     return (
-        <div className="ag-theme-quartz" style={{ height: 500 }}>
-            <AgGridReact<Pal> rowData={pals} columnDefs={colDefs} />
-        </div>
+        <Grid container spacing={3}>
+            <Grid item xs={12}>
+                <PalsFilter />
+            </Grid>
+            <Grid item xs={12}>
+                <div className="ag-theme-quartz" style={{ height: 500 }}>
+                    <AgGridReact<Pal> rowData={pals} columnDefs={colDefs} />
+                </div>
+            </Grid>
+        </Grid>
     );
 };
 
