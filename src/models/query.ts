@@ -42,10 +42,9 @@ export class Query {
         let queryString = '?';
 
         if (this.#filters) {
-            queryString += this.#filters.reduce(
-                (acc, item) => `${acc}${item.field}=${item.value}`,
-                '',
-            );
+            queryString += this.#filters
+                .map((item) => `${item.field}=${item.value}`)
+                .join('&');
         }
 
         return queryString;

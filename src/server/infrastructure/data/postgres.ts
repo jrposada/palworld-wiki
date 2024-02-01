@@ -1,4 +1,11 @@
-import { Model, ModelStatic, Optional, Sequelize } from 'sequelize';
+import {
+    DataTypes,
+    Model,
+    ModelStatic,
+    Op,
+    Optional,
+    Sequelize,
+} from 'sequelize';
 import { Query } from '../../../models/query.js';
 
 type EntityConfig = {
@@ -63,9 +70,7 @@ export class Postgres<TEntityType extends string> {
     async query(type: TEntityType, query: Query): Promise<Model[]> {
         const entity = this.#entities[type];
 
-        const dbQuery: {
-            where: Record<string | number | symbol, string | number>;
-        } = {
+        const dbQuery: { where: any } = {
             where: {},
         };
         query.filters.forEach((filter) => {
@@ -78,9 +83,36 @@ export class Postgres<TEntityType extends string> {
                 return;
             }
 
-            dbQuery.where[dbField] = filter.value;
+            const attributeType = entity.dao.getAttributes()[dbField].type;
+
+            if (filter.value) {
+                dbQuery.where[dbField] = filter.value;
+            } else if (attributeType instanceof DataTypes.INTEGER) {
+                dbQuery.where[dbField] = {
+                    [Op.and]: [
+                        {
+                            [Op.ne]: null,
+                        },
+                        {
+                            [Op.ne]: 0,
+                        },
+                    ],
+                };
+            } else if (attributeType instanceof DataTypes.STRING) {
+                dbQuery.where[dbField] = {
+                    [Op.and]: [
+                        {
+                            [Op.ne]: null,
+                        },
+                        {
+                            [Op.ne]: '',
+                        },
+                    ],
+                };
+            }
         });
 
+        console.log(dbQuery);
         const dbData = await entity.dao.findAll(dbQuery);
         return dbData;
     }
