@@ -1,22 +1,22 @@
 import { t } from 'i18next';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
+import { Drop } from '../../../../models/drop';
 import FilterButton, {
     FilterButtonProps,
 } from '../../../ui-lib/filter-button/filter-button';
 
-type Option = 'bone' | 'innovativeTechnicalManual' | 'largePalSoul';
+export type PalsDropFilterProps = {
+    setState: React.Dispatch<React.SetStateAction<Record<Drop, boolean>>>;
+    state: Record<Drop, boolean>;
+};
 
-function PalsDropFilter() {
+function PalsDropFilter({
+    state: { bone, innovativeTechnicalManual, largePalSoul },
+    setState,
+}: PalsDropFilterProps) {
     const id = 'pal-drop-filter-button';
 
-    const [{ bone, innovativeTechnicalManual, largePalSoul }, setState] =
-        useState({
-            bone: false,
-            innovativeTechnicalManual: false,
-            largePalSoul: false,
-        });
-
-    const options = useMemo<FilterButtonProps<Option>['options']>(
+    const options = useMemo<FilterButtonProps<Drop>['options']>(
         () => [
             { name: 'bone', value: bone, label: t('pal.drop.bone') },
             {
@@ -34,7 +34,7 @@ function PalsDropFilter() {
     );
 
     return (
-        <FilterButton<Option>
+        <FilterButton<Drop>
             id={id}
             label={t('pal.filter.drop')}
             options={options}

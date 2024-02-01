@@ -1,13 +1,17 @@
 import { Grid } from '@mui/material';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useState } from 'react';
 import { useGetPals } from '../core/api/get-pals/get-pals';
 import PalsTable, { PalsTableProps } from '../ui/pals/pals-table/pals-table';
 
 const HomeRoute: FunctionComponent = () => {
-    const { data } = useGetPals();
+    const [filter, setFilter] = useState<
+        Arguments<typeof useGetPals>['0']['filter']
+    >({ ability: {}, drop: {} });
 
-    const handleFilterChange: PalsTableProps['onFilterChange'] = () => {
-        console.log('TODO');
+    const { data } = useGetPals({ filter });
+
+    const handleFilterChange: PalsTableProps['onFilterChange'] = (filter) => {
+        setFilter(filter);
     };
 
     return (

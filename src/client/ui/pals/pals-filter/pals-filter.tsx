@@ -1,25 +1,36 @@
 import { Grid } from '@mui/material';
-import { FunctionComponent } from 'react';
-import PalsAbilityFilter from './pals-ability-filter';
-import PalsDropFilter from './pals-drop-filter';
+import PalsAbilityFilter, {
+    PalsAbilityFilterProps,
+} from './pals-ability-filter';
+import PalsDropFilter, { PalsDropFilterProps } from './pals-drop-filter';
 
 type PalsFilterProps = {
-    onChange: () => void;
+    abilitySetState: PalsAbilityFilterProps['setState'];
+    abilityState: PalsAbilityFilterProps['state'];
+    dropSetState: PalsDropFilterProps['setState'];
+    dropState: PalsDropFilterProps['state'];
 };
 
-const PalsFilter: FunctionComponent<PalsFilterProps> = () => {
-    // TODO: onChange
+function PalsFilter({
+    abilitySetState,
+    abilityState,
+    dropSetState,
+    dropState,
+}: PalsFilterProps) {
     return (
         <Grid container spacing={2}>
             <Grid item>
-                <PalsAbilityFilter />
+                <PalsAbilityFilter
+                    setState={abilitySetState}
+                    state={abilityState}
+                />
             </Grid>
             <Grid item>
-                <PalsDropFilter />
+                <PalsDropFilter setState={dropSetState} state={dropState} />
             </Grid>
         </Grid>
     );
-};
+}
 
 export default PalsFilter;
 export type { PalsFilterProps };

@@ -1,13 +1,16 @@
 import { Grid } from '@mui/material';
 import { AgGridReact, AgGridReactProps } from 'ag-grid-react';
 import { t } from 'i18next';
-import { FunctionComponent, useState } from 'react';
+import { FunctionComponent, useEffect, useRef, useState } from 'react';
 import { Pal } from '../../../../models/pal';
 import PalsFilter, { PalsFilterProps } from '../pals-filter/pals-filter';
 
 type PalsTableProps = {
     pals: Pal[] | undefined;
-    onFilterChange: PalsFilterProps['onChange'];
+    onFilterChange: (filter: {
+        ability: PalsFilterProps['abilityState'];
+        drop: PalsFilterProps['dropState'];
+    }) => void;
 };
 
 const PalsTable: FunctionComponent<PalsTableProps> = ({
@@ -49,10 +52,49 @@ const PalsTable: FunctionComponent<PalsTableProps> = ({
         { field: 'abilities.watering', headerName: t('pal.ability.watering') },
     ]);
 
+    const [abilityFilterState, setAbilityFilterState] = useState<
+        PalsFilterProps['abilityState']
+    >({
+        cooling: false,
+        farming: false,
+        gathering: false,
+        generatingElectricity: false,
+        handiwork: false,
+        kindling: false,
+        lumbering: false,
+        medicineProduction: false,
+        mining: false,
+        planting: false,
+        transporting: false,
+        watering: false,
+    });
+
+    const [dropFilterState, setDropFilterState] = useState<
+        PalsFilterProps['dropState']
+    >({
+        bone: false,
+        innovativeTechnicalManual: false,
+        largePalSoul: false,
+    });
+
+    const handleFilterChange = useRef(onFilterChange);
+
+    useEffect(() => {
+        handleFilterChange.current({
+            ability: abilityFilterState,
+            drop: dropFilterState,
+        });
+    }, [abilityFilterState, dropFilterState]);
+
     return (
         <Grid container spacing={3}>
             <Grid item xs={12}>
-                <PalsFilter onChange={onFilterChange} />
+                <PalsFilter
+                    abilitySetState={setAbilityFilterState}
+                    abilityState={abilityFilterState}
+                    dropSetState={setDropFilterState}
+                    dropState={dropFilterState}
+                />
             </Grid>
             <Grid item xs={12}>
                 <div className="ag-theme-quartz" style={{ height: 500 }}>

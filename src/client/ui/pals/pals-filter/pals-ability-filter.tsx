@@ -1,5 +1,6 @@
 import { t } from 'i18next';
-import { FunctionComponent, useMemo, useState } from 'react';
+import { useMemo } from 'react';
+import { Pal } from '../../../../models/pal';
 import FilterButton, {
     FilterButtonProps,
 } from '../../../ui-lib/filter-button/filter-button';
@@ -18,38 +19,30 @@ type Option =
     | 'transporting'
     | 'watering';
 
-const PalsAbilityFilter: FunctionComponent = () => {
-    const [
-        {
-            cooling,
-            farming,
-            gathering,
-            generatingElectricity,
-            handiwork,
-            kindling,
-            lumbering,
-            medicineProduction,
-            mining,
-            planting,
-            transporting,
-            watering,
-        },
-        setState,
-    ] = useState({
-        cooling: false,
-        farming: false,
-        gathering: false,
-        generatingElectricity: false,
-        handiwork: false,
-        kindling: false,
-        lumbering: false,
-        medicineProduction: false,
-        mining: false,
-        planting: false,
-        transporting: false,
-        watering: false,
-    });
+export type PalsAbilityFilterProps = {
+    setState: React.Dispatch<
+        React.SetStateAction<Record<keyof Pal['abilities'], boolean>>
+    >;
+    state: Record<keyof Pal['abilities'], boolean>;
+};
 
+function PalsAbilityFilter({
+    state: {
+        cooling,
+        farming,
+        gathering,
+        generatingElectricity,
+        handiwork,
+        kindling,
+        lumbering,
+        medicineProduction,
+        mining,
+        planting,
+        transporting,
+        watering,
+    },
+    setState,
+}: PalsAbilityFilterProps) {
     const options = useMemo<FilterButtonProps<Option>['options']>(
         () => [
             {
@@ -135,5 +128,5 @@ const PalsAbilityFilter: FunctionComponent = () => {
             onChange={setState}
         />
     );
-};
+}
 export default PalsAbilityFilter;
