@@ -1,8 +1,8 @@
 import { t } from 'i18next';
 import { FunctionComponent, useMemo, useState } from 'react';
-import PalsFilterButton, {
-    PalsFilterButtonProps,
-} from '../pals-filter-button/pals-filter-button';
+import FilterButton, {
+    FilterButtonProps,
+} from '../../../ui-lib/filter-button/filter-button';
 
 type Option =
     | 'cooling'
@@ -50,7 +50,7 @@ const PalsAbilityFilter: FunctionComponent = () => {
         watering: false,
     });
 
-    const options = useMemo<PalsFilterButtonProps<Option>['options']>(
+    const options = useMemo<FilterButtonProps<Option>['options']>(
         () => [
             {
                 label: t('pal.ability.cooling'),
@@ -128,7 +128,7 @@ const PalsAbilityFilter: FunctionComponent = () => {
     const id = 'pal-ability-filter-button';
 
     return (
-        <PalsFilterButton<Option>
+        <FilterButton<Option>
             id={id}
             label={t('pal.filter.ability')}
             options={options}

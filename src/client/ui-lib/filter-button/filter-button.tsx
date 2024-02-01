@@ -7,7 +7,7 @@ import {
 } from '@mui/material';
 import React, { useState } from 'react';
 
-type PalsFilterButtonProps<TOption extends string> = {
+type FilterButtonProps<TOption extends string> = {
     id: string;
     label: string;
     options: {
@@ -18,12 +18,12 @@ type PalsFilterButtonProps<TOption extends string> = {
     onChange: React.Dispatch<React.SetStateAction<Record<TOption, boolean>>>;
 };
 
-function PalsFilterButton<TOption extends string>({
+function FilterButton<TOption extends string>({
     id,
     label,
     options,
     onChange,
-}: PalsFilterButtonProps<TOption>) {
+}: FilterButtonProps<TOption>) {
     const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
     const handleClick: React.MouseEventHandler<HTMLButtonElement> = (event) => {
@@ -92,5 +92,5 @@ function PalsFilterButton<TOption extends string>({
     );
 }
 
-export default PalsFilterButton;
-export type { PalsFilterButtonProps };
+export default FilterButton;
+export type { FilterButtonProps };

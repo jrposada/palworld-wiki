@@ -1,8 +1,8 @@
 import { t } from 'i18next';
 import { useMemo, useState } from 'react';
-import PalsFilterButton, {
-    PalsFilterButtonProps,
-} from '../pals-filter-button/pals-filter-button';
+import FilterButton, {
+    FilterButtonProps,
+} from '../../../ui-lib/filter-button/filter-button';
 
 type Option = 'bone' | 'innovativeTechnicalManual' | 'largePalSoul';
 
@@ -16,7 +16,7 @@ function PalsDropFilter() {
             largePalSoul: false,
         });
 
-    const options = useMemo<PalsFilterButtonProps<Option>['options']>(
+    const options = useMemo<FilterButtonProps<Option>['options']>(
         () => [
             { name: 'bone', value: bone, label: t('pal.drop.bone') },
             {
@@ -34,7 +34,7 @@ function PalsDropFilter() {
     );
 
     return (
-        <PalsFilterButton<Option>
+        <FilterButton<Option>
             id={id}
             label={t('pal.filter.drop')}
             options={options}
