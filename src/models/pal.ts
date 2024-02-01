@@ -2,18 +2,13 @@ import { Entity } from './entity.js';
 
 export type Pal = {
     abilities: Abilities;
+    // drops: Drop[];
     food: number;
     index: number;
     name: string;
 };
 
-export type PalEntity = Pal &
-    Entity & {
-        abilities: Abilities;
-        food: number;
-        index: number;
-        name: string;
-    };
+export type PalEntity = Pal & Entity;
 
 export type Abilities = {
     cooling: number;
@@ -29,3 +24,5 @@ export type Abilities = {
     transporting: number;
     watering: number;
 };
+
+export type Drop = 'bone' | 'innovativeTechnicalManual' | 'largePalSoul';

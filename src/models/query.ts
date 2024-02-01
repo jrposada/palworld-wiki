@@ -2,11 +2,11 @@ import { Request } from 'express';
 
 // TODO: Implement OData
 export class Query {
-    get filters() {
+    get filters(): ReadonlyArray<Filter> {
         return structuredClone(this.#filters);
     }
 
-    get sorts() {
+    get sorts(): ReadonlyArray<Sort> {
         return structuredClone(this.#sorts);
     }
 
@@ -18,14 +18,37 @@ export class Query {
 
         Object.entries(query).forEach(([field, value]) => {
             if (field.startsWith('sort')) {
+                console.log('TODO: sorts');
                 return;
             }
 
             this.#filters.push({
-                field: field,
-                value: value as any,
+                field,
+                value: value as string,
             });
         });
+    }
+
+    filter(field: string, value?: string): this {
+        this.#filters.push({
+            field,
+            value: value ?? '',
+        });
+
+        return this;
+    }
+
+    toString(): string {
+        let queryString = '?';
+
+        if (this.#filters) {
+            queryString += this.#filters.reduce(
+                (acc, item) => `${acc}${item.field}=${item.value}`,
+                '',
+            );
+        }
+
+        return queryString;
     }
 }
 

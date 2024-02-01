@@ -1,6 +1,6 @@
 import { t } from 'i18next';
 import { useMemo } from 'react';
-import { Drop } from '../../../../models/drop';
+import { Drop } from '../../../../models/pal';
 import FilterButton, {
     FilterButtonProps,
 } from '../../../ui-lib/filter-button/filter-button';
