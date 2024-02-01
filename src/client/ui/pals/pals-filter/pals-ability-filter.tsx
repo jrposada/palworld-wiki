@@ -59,7 +59,7 @@ const PalsAbilityFilter: FunctionComponent = () => {
         }));
     };
 
-    const nameId = 'basic-button';
+    const nameId = 'pal-ability-filter-button';
     const open = Boolean(anchorEl);
 
     return (

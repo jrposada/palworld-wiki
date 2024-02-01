@@ -16,8 +16,14 @@
         "transporting": "Transporting",
         "watering": "Watering"
       },
+      "drop": {
+        "bone": "Bone",
+        "innovativeTechnicalManual": "Innovative Technical Manual",
+        "largePalSoul": "Large Pal Soul"
+      },
       "filter": {
-        "ability": "Work Suitability"
+        "ability": "Work Suitability",
+        "drop": "Drop"
       },
       "table": {
         "header": {
