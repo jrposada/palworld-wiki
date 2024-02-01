@@ -1,6 +1,6 @@
 import { AgGridReact, AgGridReactProps } from 'ag-grid-react';
 import { t } from 'i18next';
-import { FunctionComponent, useMemo, useState } from 'react';
+import { FunctionComponent, useState } from 'react';
 import { Pal } from '../../../../models/pal';
 
 type PalsTableProps = {
@@ -8,11 +8,6 @@ type PalsTableProps = {
 };
 
 const PalsTable: FunctionComponent<PalsTableProps> = ({ pals }) => {
-    const rowData = useMemo<AgGridReactProps<Pal>['rowData']>(
-        () => pals,
-        [pals],
-    );
-
     const [colDefs] = useState<AgGridReactProps<Pal>['columnDefs']>([
         { field: 'index', headerName: t('pal.table.header.index') },
         { field: 'name', headerName: t('pal.table.header.name') },
@@ -50,7 +45,7 @@ const PalsTable: FunctionComponent<PalsTableProps> = ({ pals }) => {
 
     return (
         <div className="ag-theme-quartz" style={{ height: 500 }}>
-            <AgGridReact<Pal> rowData={rowData} columnDefs={colDefs} />
+            <AgGridReact<Pal> rowData={pals} columnDefs={colDefs} />
         </div>
     );
 };
