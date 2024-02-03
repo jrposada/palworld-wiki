@@ -6,71 +6,19 @@
     "type": "git",
     "url": "https://github.com/jrposada/palworld-wiki.git"
   },
-  "scripts": {
-    "build": "vite build",
-    "dev": "npm run start:db && nodemon -w src/server -x tsx src/server/main.ts",
-    "format": "prettier . --write",
-    "lint-staged": "lint-staged",
-    "lint:eslint": "eslint .",
-    "lint:prettier": "prettier . --check",
-    "lint:tsc": "tsc --noEmit --project . && tsc --noEmit --project src/client",
-    "lint": "npm run lint:eslint && npm run lint:prettier",
-    "postbuild": ". ./scripts/post-build.sh",
-    "publish:docker": ". ./scripts/publish.sh",
-    "start:db": "docker compose --file compose.db.yml up --detach",
-    "start:server": "NODE_ENV=production tsx src/server/main.ts",
-    "start": "docker compose --file compose.yml up --build --detach",
-    "stop": "docker compose --file compose.yml stop"
-  },
+  "workspaces": [
+    "backend",
+    "frontend",
+    "shared"
+  ],
   "author": {
     "email": "jrposada.dev@gmail.com",
     "name": "Javier Rodriguez Posada"
   },
-  "type": "module",
-  "dependencies": {
-    "@emotion/react": "^11.11.3",
-    "@emotion/styled": "^11.11.0",
-    "@fontsource/roboto": "^5.0.8",
-    "@mui/icons-material": "^5.15.6",
-    "@mui/material": "^5.15.6",
-    "@tanstack/react-query": "^5.17.19",
-    "@tanstack/react-query-devtools": "^5.17.21",
-    "@tanstack/react-router": "^1.12.12",
-    "@tanstack/router-devtools": "^1.12.13",
-    "ag-grid-react": "^31.0.3",
-    "cookie-parser": "^1.4.6",
-    "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "i18next": "^23.8.2",
-    "i18next-browser-languagedetector": "^7.2.0",
-    "pg": "^8.11.3",
-    "pg-hstore": "^2.3.4",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-i18next": "^14.0.1",
-    "sequelize": "^6.35.2",
-    "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^4.6.3",
-    "tsx": "^4.7.0",
-    "vite-express": "^0.14.0"
-  },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "@types/cookie-parser": "^1.4.6",
-    "@types/express": "^4.17.21",
-    "@types/node": "^20.11.6",
-    "@types/pg": "^8.10.9",
-    "@types/react": "^18.2.48",
-    "@types/react-dom": "^18.2.18",
-    "@types/swagger-jsdoc": "^6.0.4",
-    "@types/swagger-ui-express": "^4.1.6",
-    "@vitejs/plugin-react-swc": "^3.5.0",
     "eslint": "^8.56.0",
-    "eslint-config-react-app": "^7.0.1",
     "lint-staged": "^15.2.0",
-    "nodemon": "^3.0.3",
     "prettier": "^3.2.4",
-    "typescript": "<5.2.0",
-    "vite": "^5.0.12"
+    "typescript": "<5.2.0"
   }
 }

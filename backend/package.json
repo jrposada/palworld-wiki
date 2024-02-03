@@ -1,0 +1,46 @@
+{
+  "name": "palworld-wiki-backend",
+  "version": "0.1.0",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jrposada/palworld-wiki.git"
+  },
+  "scripts": {
+    "dev": "npm run start:db && nodemon -w src -x tsx src/main.ts",
+    "format": "prettier . --write",
+    "lint-staged": "lint-staged",
+    "lint:eslint": "eslint .",
+    "lint:prettier": "prettier . --check",
+    "lint:tsc": "tsc --noEmit",
+    "lint": "npm run lint:eslint && npm run lint:prettier",
+    "start:db": "docker compose --file ../compose.db.yml --env-file ./.env up --detach",
+    "start": "NODE_ENV=production tsx src/server/main.ts"
+  },
+  "author": {
+    "email": "jrposada.dev@gmail.com",
+    "name": "Javier Rodriguez Posada"
+  },
+  "type": "module",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "pg-hstore": "^2.3.4",
+    "pg": "^8.11.3",
+    "sequelize": "^6.35.2",
+    "shared": "../shared",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^4.6.3",
+    "tsx": "^4.7.0"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.6",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.11.6",
+    "@types/pg": "^8.10.9",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.6",
+    "nodemon": "^3.0.3"
+  }
+}
