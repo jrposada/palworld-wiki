@@ -22,6 +22,7 @@ module.exports = {
             jsx: true, // Enable JSX parsing
         },
     },
+    ignorePatterns: ['dist/**/*'],
     rules: {
         'linebreak-style': ['error', 'unix'],
         quotes: ['error', 'single'],

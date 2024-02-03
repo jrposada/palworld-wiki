@@ -13,7 +13,7 @@
     "lint-staged": "lint-staged",
     "lint:eslint": "eslint .",
     "lint:prettier": "prettier . --check",
-    "lint:tsc": "tsc --noEmit --project . && tsc --noEmit --project src/client",
+    "lint:tsc": "tsc --noEmit",
     "lint": "npm run lint:eslint && npm run lint:prettier"
   },
   "author": {
@@ -40,8 +40,9 @@
     "react-i18next": "^14.0.1"
   },
   "devDependencies": {
-    "@types/react": "^18.2.48",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@types/react-dom": "^18.2.18",
+    "@types/react": "^18.2.48",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "eslint-config-react-app": "^7.0.1",
     "vite": "^5.0.12"
