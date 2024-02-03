@@ -55,7 +55,7 @@
 1. Push new docker image
 
     ```bash
-    ./scripts/deploy.sh
+    ./scripts/publish.sh
     ```
 
 2. SSH into Raspberry:
