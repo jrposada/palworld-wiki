@@ -38,7 +38,7 @@ console.log('aux', basePath || '/');
 
 ViteExpress.config({
     inlineViteConfig: {
-        base: '/paco',
+        base: basePath,
     },
 });
 
