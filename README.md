@@ -55,7 +55,7 @@
 1. Push new docker image
 
     ```bash
-    ./scripts/publish.sh
+    npm run publish:docker
     ```
 
 2. SSH into Raspberry:
