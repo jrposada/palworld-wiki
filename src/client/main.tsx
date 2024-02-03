@@ -21,7 +21,10 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
         <ThemeProvider theme={defaultTheme}>
             <CssBaseline />
-            <RouterProvider router={router} />
+            <RouterProvider
+                router={router}
+                basepath={import.meta.env.BASE_URL}
+            />
         </ThemeProvider>
     </React.StrictMode>,
 );

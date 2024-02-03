@@ -34,6 +34,14 @@ const swaggerSpecs = swaggerJsdoc(options);
 app.use(`${basePath}/api`, router);
 app.use(`${basePath}/swagger`, serve, setup(swaggerSpecs));
 
+console.log('aux', basePath || '/');
+
+ViteExpress.config({
+    inlineViteConfig: {
+        base: basePath || '/',
+    },
+});
+
 ViteExpress.listen(app, +port, () => {
     console.log(`App running at http://localhost:${port}${basePath}`);
 });

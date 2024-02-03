@@ -29,7 +29,7 @@ export const useGetPals: (
                 .forEach(([drop]) => void query.filter(`drops.${drop}`));
 
             const response: ApiResponse<Pal[]> = await (
-                await fetch(`/api/pals${query}`)
+                await fetch(`${import.meta.env.BASE_URL}/api/pals${query}`)
             ).json();
 
             return response.data;
