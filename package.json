@@ -13,6 +13,7 @@
   ],
   "scripts": {
     "publish:docker": ". ./scripts/publish.sh",
+    "deploy": ". ./scripts/deploy.sh",
     "start": "docker compose --file compose.yml up --build --detach",
     "stop": "docker compose --file compose.yml stop"
   },
