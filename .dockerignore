@@ -10,6 +10,7 @@
 # NodeJS
 .nvmrc
 node_modules
+dist
 
 # Docker compose files.
 .dockerignore
