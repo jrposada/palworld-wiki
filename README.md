@@ -73,16 +73,6 @@
     npm start
     ```
 
-"scripts": {
-"build": "vite build",
-"dev": "npm run start:db && nodemon -w src/server -x tsx src/server/main.ts",
-"format": "prettier . --write",
-"lint-staged": "lint-staged",
-"lint:eslint": "eslint .",
-"lint:prettier": "prettier . --check",
-"lint:tsc": "tsc --noEmit --project . && tsc --noEmit --project src/client",
-"lint": "npm run lint:eslint && npm run lint:prettier",
-"publish:docker": ". ./scripts/publish.sh",
-"start": "docker compose --file compose.yml up --build --detach",
-"stop": "docker compose --file compose.yml stop"
-},
+TODO:
+
+-   Try to remove duplication in .env files
