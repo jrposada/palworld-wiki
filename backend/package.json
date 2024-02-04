@@ -15,7 +15,7 @@
     "lint:tsc": "tsc --noEmit",
     "lint": "npm run lint:eslint && npm run lint:prettier",
     "start:db": "docker compose --file ../compose.db.yml --env-file ./.env up --detach",
-    "start": "NODE_ENV=production tsx src/server/main.ts"
+    "start": "NODE_ENV=production tsx src/main.ts"
   },
   "author": {
     "email": "jrposada.dev@gmail.com",
