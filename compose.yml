@@ -1,11 +1,17 @@
 services:
-  palworld_wiki_service:
-    image: jrposada/palworld-wiki:latest
+  palworld_wiki_backend:
+    image: jrposada/palworld-wiki-backend:latest
     restart: unless-stopped
     volumes:
-      - service_data:/app/data
+      - frontend_data:/app/data
+
+  palworld_wiki_frontend:
+    image: jrposada/palworld-wiki-frontend:latest
+    restart: unless-stopped
+    volumes:
+      - backend_data:/app/data
     ports:
-      - '${PORT}:${PORT}'
+      - '${VITE_PORT}:${VITE_PORT}'
 
   palworld_wiki_db:
     extends:
@@ -18,7 +24,9 @@ services:
       service: pgadmin4
 
 volumes:
-  service_data:
+  backend_data:
+    external: false
+  frontend_data:
     external: false
   pgadmin4_data:
     external: false

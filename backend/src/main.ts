@@ -11,7 +11,7 @@ dotenv.config();
 const basePath = process.env.BASE_PATH ? `/${process.env.BASE_PATH}` : '';
 const app = express();
 
-const port = process.env.PORT || 3000;
+const port = process.env.API_PORT || 3000;
 
 app.use(json());
 app.use(urlencoded({ extended: false }));

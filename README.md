@@ -19,7 +19,7 @@
         1. Name: Palworld Wiki (doesn't really matters)
     2. Connection (values match `compose.yml` definition):
         1. Host name/address: `palworld_wiki_db` (docker service name)
-        2. Port: `5432`
+        2. Port: `3032`
         3. Username: `jrposada.dev`
         4. Password: `changeme`
 

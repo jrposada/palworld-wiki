@@ -1,6 +1,7 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
 import { Entity } from 'shared/models/entity.ts';
 import { Pal, PalEntity } from 'shared/models/pal.ts';
+import { ObjectKeyPaths } from 'shared/utils/object-key-paths.ts';
 
 type PalDao = {
     abilitiesCooling: number;

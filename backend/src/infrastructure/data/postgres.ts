@@ -28,11 +28,12 @@ export class Postgres<TEntityType extends string> {
             entities: Record<TEntityType, EntityConfig>;
             host: string;
             password: string;
+            port: string;
             user: string;
         },
     ) {
         this.#client = new Sequelize(
-            `postgres://${this.config.user}:${this.config.password}@${this.config.host}:5432/${this.config.database}`,
+            `postgres://${this.config.user}:${this.config.password}@${this.config.host}:${this.config.port}/${this.config.database}`,
         );
 
         this.#entities = Object.entries<EntityConfig>(config.entities).reduce<
