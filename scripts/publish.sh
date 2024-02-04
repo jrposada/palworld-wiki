@@ -9,7 +9,7 @@ fi
 
 echo "Backend..."
 docker buildx build \
-    --file ../Dockerfile.backend \
+    --file ./Dockerfile.backend \
     --platform linux/amd64,linux/arm64 \
     -t jrposada/palworld-wiki-backend:$version \
     -t jrposada/palworld-wiki-backend:latest \
@@ -17,8 +17,9 @@ docker buildx build \
     .
 
 echo "Frontend..."
+npm run build --workspace=frontend
 docker buildx build \
-    --file ../Dockerfile.frontend \
+    --file ./Dockerfile.frontend \
     --platform linux/amd64,linux/arm64 \
     -t jrposada/palworld-wiki-frontend:$version \
     -t jrposada/palworld-wiki-frontend:latest \

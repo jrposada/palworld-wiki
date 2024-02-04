@@ -9,9 +9,9 @@ services:
     image: jrposada/palworld-wiki-frontend:latest
     restart: unless-stopped
     volumes:
-      - backend_data:/app/data
+      - backend_data:/app/data # TODO: point to nginx logs folder
     ports:
-      - '${VITE_PORT}:${VITE_PORT}'
+      - '${VITE_PORT}:80'
 
   palworld_wiki_db:
     extends:
