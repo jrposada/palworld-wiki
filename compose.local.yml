@@ -6,6 +6,8 @@ services:
     restart: unless-stopped
     volumes:
       - frontend_data:/app/data
+    ports:
+      - '${API_PORT}:${API_PORT}'
 
   palworld_wiki_frontend:
     build:
