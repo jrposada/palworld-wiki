@@ -9,8 +9,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
-      - '${PG_PORT}:5432' # Map port 5432 in the container to port PG_PORT on the Docker host.
-
+      - '${PG_HOST_PORT}:5432'
   pgadmin4:
     image: dpage/pgadmin4:latest
     depends_on:

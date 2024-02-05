@@ -16,7 +16,7 @@ export class PalService {
             !process.env.PG_DATABASE ||
             !process.env.PG_HOST ||
             !process.env.PG_PASSWORD ||
-            !process.env.PG_PORT ||
+            !process.env.PG_ACCESS_PORT ||
             !process.env.PG_USER
         ) {
             throw new Error('Missing db connection data');
@@ -29,7 +29,7 @@ export class PalService {
             },
             host: process.env.PG_HOST,
             password: process.env.PG_PASSWORD,
-            port: process.env.PG_PORT,
+            port: process.env.PG_ACCESS_PORT,
             user: process.env.PG_USER,
         });
     }
