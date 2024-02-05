@@ -17,7 +17,6 @@ const defaultTheme = createTheme();
 const routeTree = rootRoute.addChildren(routes);
 const router = createRouter({ routeTree });
 
-console.log('root', import.meta.env.BASE_URL);
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
         <ThemeProvider theme={defaultTheme}>
