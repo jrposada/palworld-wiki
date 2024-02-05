@@ -6,7 +6,8 @@
 
 ## Local development
 
-1. Launch local server: `npm run dev`
+1. Launch local backend: `npm run dev --workspace=backend`
+2. Launch local frontend: `npm run dev --workspace=frontend`
 
 ### Connect to database
 
@@ -62,7 +63,6 @@
 
     ```bash
     # Stop current and remove current containers
-    npm stop
     docker compose down
 
     # Pull latest changes
@@ -72,7 +72,3 @@
     # Start container
     npm start
     ```
-
-TODO:
-
--   Try to remove duplication in .env files
