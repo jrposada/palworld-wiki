@@ -7,7 +7,7 @@ services:
       POSTGRES_PASSWORD: ${PG_PASSWORD}
       POSTGRES_DB: ${PG_DATABASE}
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - db_data:/var/lib/postgresql/data
     ports:
       - '${PG_HOST_PORT}:5432'
   pgadmin4:
@@ -26,5 +26,5 @@ services:
 volumes:
   pgadmin4_data:
     external: false
-  postgres_data:
+  db_data:
     external: false
