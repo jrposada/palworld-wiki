@@ -121,7 +121,14 @@ async function main() {
                 .trim()
                 .slice(1),
         );
-        pals.push({ name, number });
+
+        let food = 0;
+        $page('div.pi-data-value img').each((_, item) => {
+            if (item.attribs.alt === 'Food on icon') {
+                food++;
+            }
+        });
+        pals.push({ name, number, food });
     });
 
     console.log(pals);
