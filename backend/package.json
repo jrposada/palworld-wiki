@@ -15,6 +15,7 @@
     "lint:tsc": "tsc --noEmit",
     "lint": "npm run lint:eslint && npm run lint:prettier",
     "db:seed:all": "sequelize-cli db:seed:all",
+    "db:seed:undo": "sequelize-cli db:seed:undo",
     "db:seed:generate": "sequelize-cli seed:generate --name",
     "db:migration:generate": "sequelize-cli model:generate --attributes placeholder:string --name",
     "db:migrate:up": "sequelize-cli db:migrate",
