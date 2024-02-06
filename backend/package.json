@@ -14,6 +14,9 @@
     "lint:prettier": "prettier . --check",
     "lint:tsc": "tsc --noEmit",
     "lint": "npm run lint:eslint && npm run lint:prettier",
+    "seed:all": "sequelize-cli db:seed:all",
+    "seed:generate": "sequelize-cli seed:generate --name",
+    "sequelize-cli": "sequelize-cli",
     "start:db": "docker compose --file ../compose.db.yml --env-file ./.env up --detach",
     "start": "NODE_ENV=production tsx src/main.ts"
   },
