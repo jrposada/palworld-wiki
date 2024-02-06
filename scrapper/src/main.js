@@ -115,7 +115,8 @@ async function main() {
         const $page = cheerio.load(pageHtml);
 
         const name = $page('.mw-page-title-main').text().trim();
-        const number = parseInt(
+
+        const index = parseInt(
             $page('[data-source="no"] div.pi-data-value')
                 .text()
                 .trim()
@@ -128,7 +129,28 @@ async function main() {
                 food++;
             }
         });
-        pals.push({ name, number, food });
+
+        // const abilitiesGathering =
+        pals.push({
+            abilitiesCooling: '', // todo
+            abilitiesFarming: '', // todo
+            abilitiesGathering: '', // todo
+            abilitiesGeneratingElectricity: '', // todo
+            abilitiesHandiwork: '', // todo
+            abilitiesKindling: '', // todo
+            abilitiesLumbering: '', // todo
+            abilitiesMedicineProduction: '', // todo
+            abilitiesMining: '', // todo
+            abilitiesPlanting: '', // todo
+            abilitiesTransporting: '', // todo
+            abilitiesWatering: '', // todo
+            drops: '', // todo
+            elements: '', // todo
+            food,
+            index,
+            name,
+            production: '', // todo
+        });
     });
 
     console.log(pals);
