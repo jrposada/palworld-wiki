@@ -9,6 +9,7 @@
   "workspaces": [
     "backend",
     "frontend",
+    "scrapper",
     "shared"
   ],
   "scripts": {
