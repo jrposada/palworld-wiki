@@ -1,9 +1,8 @@
-import { Pal, PalEntity } from 'shared/models/pal.ts';
+import { PalEntity } from 'shared/models/pal.ts';
 import { Query } from 'shared/models/query.ts';
 import {
     PAL_DAO_MAPPER,
     palDao,
-    toPalDao,
     toPalEntity,
 } from '../infrastructure/data/pal-dao.js';
 import { Postgres } from '../infrastructure/data/postgres.js';
@@ -36,14 +35,6 @@ export class PalService {
 
     async initialize(): Promise<void> {
         await this.#db.connect();
-    }
-
-    async create(pal: Pal): Promise<PalEntity> {
-        const dao = toPalDao(pal);
-        const dbData = await this.#db.create('pal', dao);
-        const data = toPalEntity(dbData);
-
-        return data;
     }
 
     async get(query: Query): Promise<PalEntity[]> {

@@ -1,7 +1,9 @@
-import { DataTypes, Model, Sequelize } from 'sequelize';
+import { Model, Sequelize } from 'sequelize';
 import { Entity } from 'shared/models/entity.ts';
 import { Pal, PalEntity } from 'shared/models/pal.ts';
 import { ObjectKeyPaths } from 'shared/utils/object-key-paths.ts';
+/** @ts-ignore */
+import palsDefinition from '../../../definitions/pals.cjs';
 
 type PalDao = {
     abilitiesCooling: number;
@@ -22,27 +24,10 @@ type PalDao = {
 };
 
 export function palDao(sequelize: Sequelize) {
-    return sequelize.define('pal', {
-        abilitiesCooling: DataTypes.INTEGER,
-        abilitiesFarming: DataTypes.INTEGER,
-        abilitiesGathering: DataTypes.INTEGER,
-        abilitiesGeneratingElectricity: DataTypes.INTEGER,
-        abilitiesHandiwork: DataTypes.INTEGER,
-        abilitiesKindling: DataTypes.INTEGER,
-        abilitiesLumbering: DataTypes.INTEGER,
-        abilitiesMedicineProduction: DataTypes.INTEGER,
-        abilitiesMining: DataTypes.INTEGER,
-        abilitiesPlanting: DataTypes.INTEGER,
-        abilitiesTransporting: DataTypes.INTEGER,
-        abilitiesWatering: DataTypes.INTEGER,
-        food: DataTypes.INTEGER,
-        index: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            unique: true,
-        },
-        name: DataTypes.STRING,
-    });
+    return sequelize.define(
+        palsDefinition.PALS_MODEL_NAME,
+        palsDefinition.PALS_DEFINITION,
+    );
 }
 
 export function toPalDao(pal: Pal): PalDao {
