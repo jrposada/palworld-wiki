@@ -50,7 +50,6 @@ export class Postgres<TEntityType extends string> {
     async connect() {
         try {
             await this.#client.authenticate();
-            await this.#client.sync();
             console.log(
                 'Connection with database has been established successfully.',
             );
