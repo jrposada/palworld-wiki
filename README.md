@@ -24,6 +24,10 @@
         3. Username: `jrposada.dev`
         4. Password: `changeme`
 
+## Database migrations
+
+TODO
+
 ## How to deploy
 
 ### Prerequisite
