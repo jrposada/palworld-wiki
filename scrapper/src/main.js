@@ -114,7 +114,7 @@ async function main() {
     pagesHtmls.forEach((pageHtml) => {
         const $page = cheerio.load(pageHtml);
 
-        const name = $page('[data-source="name"]').text().trim();
+        const name = $page('.mw-page-title-main').text().trim();
         const number = parseInt(
             $page('[data-source="no"] div.pi-data-value')
                 .text()
