@@ -32,6 +32,6 @@ export const useGetPals: (
                 await fetch(`${import.meta.env.VITE_API_BASE_URL}/pals${query}`)
             ).json();
 
-            return response.data;
+            return response.data ?? [];
         },
     });
