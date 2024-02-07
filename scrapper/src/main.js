@@ -85,6 +85,20 @@ async function main() {
                 drops.push(dropCamelCase);
             });
 
+        const production = [];
+        $page('p:contains("Farming Produce")')
+            .next()
+            .find('li')
+            .each((_, element) => {
+                const productionPascalCase = $page(element)
+                    .text()
+                    .replace(/\s/g, '');
+                const productionCamelCase =
+                    productionPascalCase.charAt(0).toLowerCase() +
+                    productionPascalCase.slice(1);
+                production.push(productionCamelCase);
+            });
+
         pals.push({
             abilitiesCooling: abilities.abilitiesCooling,
             abilitiesFarming: abilities.abilitiesFarming,
@@ -99,12 +113,12 @@ async function main() {
             abilitiesPlanting: abilities.abilitiesPlanting,
             abilitiesTransporting: abilities.abilitiesTransporting,
             abilitiesWatering: abilities.abilitiesWatering,
-            drops, // todo
+            drops,
             elements: '', // todo
             food,
             index,
             name,
-            production: '', // todo
+            production,
         });
     });
 
