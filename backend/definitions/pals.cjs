@@ -65,7 +65,7 @@ module.exports = {
         },
         index: {
             allowNull: false,
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             unique: true,
         },
         name: {

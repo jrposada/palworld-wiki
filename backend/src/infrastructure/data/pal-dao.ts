@@ -19,7 +19,7 @@ type PalDao = {
     abilitiesTransporting: number;
     abilitiesWatering: number;
     food: number;
-    index: number;
+    index: string;
     name: string;
 };
 

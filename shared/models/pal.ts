@@ -4,7 +4,7 @@ export type Pal = {
     abilities: Abilities;
     // drops: Drop[];
     food: number;
-    index: number;
+    index: string;
     name: string;
 };
 

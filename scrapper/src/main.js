@@ -9,7 +9,7 @@ async function main() {
 
     const baseUrl = 'https://palworld.fandom.com';
     const indexUrl = `${baseUrl}/wiki/Paldeck`;
-    const batchSize = 2;
+    const batchSize = 5;
     const minDelayBetweenBatchesMs = 1000;
     const maxDelayBetweenBatchesMs = 3000;
 
@@ -33,7 +33,7 @@ async function main() {
     let i = 0;
     while (i < index.length) {
         progressLogger.updateProgress(
-            `Requesting pages: ${i} .. ${i + batchSize - 1}`,
+            `Requesting pages: ${i + 1} .. ${i + batchSize}`,
         );
 
         const batch = index.slice(i, i + batchSize);
@@ -59,24 +59,27 @@ async function main() {
             logger.log(`Failed fetch to ${i} .. ${i + batchSize - 1}`, err);
         }
     }
+    progressLogger.updateProgress();
 
     const pagesHtmls = await Promise.all(
         pagesResponses.map((response) => response.text()),
     );
 
+    logger.log('Scrapping pals data...');
+
     const pals = [];
-    pagesHtmls.forEach((pageHtml) => {
+    pagesHtmls.forEach((pageHtml, i) => {
         const $page = cheerio.load(pageHtml);
 
         const name = $page('.mw-page-title-main').text().trim();
-        logger.log(`Scrapping ${name}...`);
-
-        const index = parseInt(
-            $page('[data-source="no"] div.pi-data-value')
-                .text()
-                .trim()
-                .slice(1),
+        progressLogger.updateProgress(
+            `Scrapping ${name} (${i + 1}/${pagesHtmls.length})...`,
         );
+
+        const index = $page('[data-source="no"] div.pi-data-value')
+            .text()
+            .trim()
+            .slice(1);
 
         const elements = [];
         $page('[data-source="ele1"] div.pi-data-value span').each(
@@ -135,28 +138,34 @@ async function main() {
                 production.push(value);
             });
 
-        pals.push({
-            abilitiesCooling: abilities.abilitiesCooling,
-            abilitiesFarming: abilities.abilitiesFarming,
-            abilitiesGathering: abilities.abilitiesGathering,
-            abilitiesGeneratingElectricity:
-                abilities.abilitiesGeneratingElectricity,
-            abilitiesHandiwork: abilities.abilitiesHandiwork,
-            abilitiesKindling: abilities.abilitiesKindling,
-            abilitiesLumbering: abilities.abilitiesLumbering,
-            abilitiesMedicineProduction: abilities.abilitiesMedicineProduction,
-            abilitiesMining: abilities.abilitiesMining,
-            abilitiesPlanting: abilities.abilitiesPlanting,
-            abilitiesTransporting: abilities.abilitiesTransporting,
-            abilitiesWatering: abilities.abilitiesWatering,
-            drops,
-            elements,
-            food,
-            index,
-            name,
-            production,
-        });
+        if (index !== '???') {
+            pals.push({
+                abilitiesCooling: abilities.abilitiesCooling,
+                abilitiesFarming: abilities.abilitiesFarming,
+                abilitiesGathering: abilities.abilitiesGathering,
+                abilitiesGeneratingElectricity:
+                    abilities.abilitiesGeneratingElectricity,
+                abilitiesHandiwork: abilities.abilitiesHandiwork,
+                abilitiesKindling: abilities.abilitiesKindling,
+                abilitiesLumbering: abilities.abilitiesLumbering,
+                abilitiesMedicineProduction:
+                    abilities.abilitiesMedicineProduction,
+                abilitiesMining: abilities.abilitiesMining,
+                abilitiesPlanting: abilities.abilitiesPlanting,
+                abilitiesTransporting: abilities.abilitiesTransporting,
+                abilitiesWatering: abilities.abilitiesWatering,
+                drops,
+                elements,
+                food,
+                index,
+                name,
+                production,
+            });
+        }
     });
+    progressLogger.updateProgress();
+
+    logger.log(`Found data of ${pals.length} pals`);
 
     generateData(pals);
     process.exit(0);
