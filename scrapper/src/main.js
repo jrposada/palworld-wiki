@@ -73,6 +73,18 @@ async function main() {
                 abilities[`abilities${ability}`] = parseInt(value);
             });
 
+        const drops = [];
+        $page('p:contains("Possible Drops:")')
+            .next()
+            .find('li')
+            .each((_, element) => {
+                const dropPascalCase = $page(element).text().replace(/\s/g, '');
+                const dropCamelCase =
+                    dropPascalCase.charAt(0).toLowerCase() +
+                    dropPascalCase.slice(1);
+                drops.push(dropCamelCase);
+            });
+
         pals.push({
             abilitiesCooling: abilities.abilitiesCooling,
             abilitiesFarming: abilities.abilitiesFarming,
@@ -87,7 +99,7 @@ async function main() {
             abilitiesPlanting: abilities.abilitiesPlanting,
             abilitiesTransporting: abilities.abilitiesTransporting,
             abilitiesWatering: abilities.abilitiesWatering,
-            drops: '', // todo
+            drops, // todo
             elements: '', // todo
             food,
             index,
@@ -96,6 +108,7 @@ async function main() {
         });
     });
 
+    console.log(pals);
     process.exit(0);
 }
 
