@@ -1,4 +1,5 @@
 import createProgressFooter from 'cli-progress-footer';
+import logger from './logger.js';
 
 let progressFooter;
 
@@ -13,6 +14,7 @@ const progressLogger = {
                 );
         }
         progressFooter.updateProgress(msg);
+        logger.logFileOnly(msg);
     },
 };
 export default progressLogger;

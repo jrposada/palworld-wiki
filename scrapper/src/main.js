@@ -1,12 +1,17 @@
 import * as cheerio from 'cheerio';
 import { generateData } from './generate-data.js';
-import { Logger } from './logger.js';
+import logger from './logger.js';
+import progressLogger from './progress-logger.js';
 import { toCamelCase } from './utils.js';
 
 async function main() {
-    const logger = new Logger();
+    logger.start();
+
     const baseUrl = 'https://palworld.fandom.com';
     const indexUrl = `${baseUrl}/wiki/Paldeck`;
+    const batchSize = 2;
+    const minDelayBetweenBatchesMs = 1000;
+    const maxDelayBetweenBatchesMs = 3000;
 
     const html = await (await fetch(indexUrl)).text();
     const $ = cheerio.load(html);
@@ -22,9 +27,37 @@ async function main() {
 
     logger.log();
 
-    const pagesResponses = await Promise.all(
-        index.slice(8, 10).map((link) => fetch(`${baseUrl}${link}`)),
-    );
+    const pagesResponses = [];
+    let i = 0;
+    while (i < index.length) {
+        progressLogger.updateProgress(
+            `Requesting pages: ${i} .. ${i + batchSize - 1}`,
+        );
+
+        const batch = index.slice(i, i + batchSize);
+        const batchPromises = batch.map((link) => fetch(`${baseUrl}${link}`));
+        try {
+            const batchResponses = await Promise.all(batchPromises);
+            pagesResponses.push(...batchResponses);
+
+            // Wait for delay before next batch
+            if (i + batchSize < index.length) {
+                const delay =
+                    Math.floor(
+                        Math.random() *
+                            (maxDelayBetweenBatchesMs -
+                                minDelayBetweenBatchesMs +
+                                1),
+                    ) + minDelayBetweenBatchesMs;
+                await new Promise((resolve) => setTimeout(resolve, delay));
+            }
+
+            i += batchSize;
+        } catch (err) {
+            logger.log(`Failed fetch to ${i} .. ${i + batchSize - 1}`, err);
+        }
+    }
+
     const pagesHtmls = await Promise.all(
         pagesResponses.map((response) => response.text()),
     );

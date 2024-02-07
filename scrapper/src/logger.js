@@ -1,19 +1,25 @@
 import fs from 'node:fs';
 
-export class Logger {
-    #filename = './scrapper.log';
+const filename = './scrapper.log';
 
-    constructor() {
-        if (fs.existsSync(this.#filename)) {
-            fs.rmSync(this.#filename);
+const logger = {
+    start() {
+        if (fs.existsSync(filename)) {
+            fs.rmSync(filename);
         }
-    }
-
+    },
     log(...args) {
         const formattedArgs = args
             .map((arg) => (typeof arg === 'object' ? JSON.stringify(arg) : arg))
-            .join(', ')
-            .concat('\n');
-        fs.appendFileSync(this.#filename, formattedArgs);
-    }
-}
+            .join(', ');
+        fs.appendFileSync(filename, formattedArgs.concat('\n'));
+        console.log(formattedArgs);
+    },
+    logFileOnly(...args) {
+        const formattedArgs = args
+            .map((arg) => (typeof arg === 'object' ? JSON.stringify(arg) : arg))
+            .join(', ');
+        fs.appendFileSync(filename, formattedArgs.concat('\n'));
+    },
+};
+export default logger;
