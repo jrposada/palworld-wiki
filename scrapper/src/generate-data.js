@@ -35,7 +35,7 @@ export function generateData(data) {
             `        elements: ${(pal.elements.length > 0 && JSON.stringify(pal.elements)) || 'null'},`,
             `        food: ${pal.food},`,
             `        index: ${pal.index},`,
-            `        name: '${pal.name}',`,
+            `        name: "${pal.name}",`,
             `        production: ${(pal.production.length > 0 && JSON.stringify(pal.production)) || 'null'},`,
             '    },',
         );
