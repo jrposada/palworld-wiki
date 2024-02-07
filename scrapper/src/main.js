@@ -1,4 +1,5 @@
 import * as cheerio from 'cheerio';
+import { generateData } from './generate-data.js';
 import { Logger } from './logger.js';
 import { toCamelCase } from './utils.js';
 
@@ -14,7 +15,7 @@ async function main() {
     $('table.fandom-table tbody tr td:nth-child(3)').each((_, element) => {
         const href = $(element).find('a').attr('href');
         if (href) {
-            logger.log(`Link: ${href}`);
+            logger.log(`Link found: ${href}`);
             index.push(href);
         }
     });
@@ -33,7 +34,7 @@ async function main() {
         const $page = cheerio.load(pageHtml);
 
         const name = $page('.mw-page-title-main').text().trim();
-        logger.log(`Scrapping ${name}`);
+        logger.log(`Scrapping ${name}...`);
 
         const index = parseInt(
             $page('[data-source="no"] div.pi-data-value')
@@ -122,7 +123,7 @@ async function main() {
         });
     });
 
-    console.log(pals);
+    generateData(pals);
     process.exit(0);
 }
 
