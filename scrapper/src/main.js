@@ -130,20 +130,45 @@ async function main() {
             }
         });
 
-        // const abilitiesGathering =
+        const abilities = {
+            abilitiesCooling: 0,
+            abilitiesFarming: 0,
+            abilitiesGathering: 0,
+            abilitiesGeneratingElectricity: 0,
+            abilitiesHandiwork: 0,
+            abilitiesKindling: 0,
+            abilitiesLumbering: 0,
+            abilitiesMedicineProduction: 0,
+            abilitiesMining: 0,
+            abilitiesPlanting: 0,
+            abilitiesTransporting: 0,
+            abilitiesWatering: 0,
+        };
+
+        $page('p:contains("Work Suitability:")')
+            .next()
+            .find('li')
+            .each((_, element) => {
+                const words = $page(element).text().split(' ');
+                const value = words.splice(-1);
+                const ability = words.join('');
+                abilities[`abilities${ability}`] = parseInt(value);
+            });
+
         pals.push({
-            abilitiesCooling: '', // todo
-            abilitiesFarming: '', // todo
-            abilitiesGathering: '', // todo
-            abilitiesGeneratingElectricity: '', // todo
-            abilitiesHandiwork: '', // todo
-            abilitiesKindling: '', // todo
-            abilitiesLumbering: '', // todo
-            abilitiesMedicineProduction: '', // todo
-            abilitiesMining: '', // todo
-            abilitiesPlanting: '', // todo
-            abilitiesTransporting: '', // todo
-            abilitiesWatering: '', // todo
+            abilitiesCooling: abilities.abilitiesCooling,
+            abilitiesFarming: abilities.abilitiesFarming,
+            abilitiesGathering: abilities.abilitiesGathering,
+            abilitiesGeneratingElectricity:
+                abilities.abilitiesGeneratingElectricity,
+            abilitiesHandiwork: abilities.abilitiesHandiwork,
+            abilitiesKindling: abilities.abilitiesKindling,
+            abilitiesLumbering: abilities.abilitiesLumbering,
+            abilitiesMedicineProduction: abilities.abilitiesMedicineProduction,
+            abilitiesMining: abilities.abilitiesMining,
+            abilitiesPlanting: abilities.abilitiesPlanting,
+            abilitiesTransporting: abilities.abilitiesTransporting,
+            abilitiesWatering: abilities.abilitiesWatering,
             drops: '', // todo
             elements: '', // todo
             food,
