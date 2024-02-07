@@ -4,6 +4,7 @@ import { t } from 'i18next';
 import { FunctionComponent, useEffect, useRef, useState } from 'react';
 import { Pal } from 'shared/models/pal';
 import PalsFilter, { PalsFilterProps } from '../pals-filter/pals-filter';
+import { abilityValueFormatter } from './ability-value-formatter';
 import {
     COOLING_IMAGE_TAG,
     FARMING_IMAGE_TAG,
@@ -43,18 +44,21 @@ const PalsTable: FunctionComponent<PalsTableProps> = ({
             headerName: t('pal.ability.cooling'),
             headerComponentParams:
                 palsTableAbilityComponentParams(COOLING_IMAGE_TAG),
+            valueFormatter: abilityValueFormatter,
         },
         {
             field: 'abilities.farming',
             headerName: t('pal.ability.farming'),
             headerComponentParams:
                 palsTableAbilityComponentParams(FARMING_IMAGE_TAG),
+            valueFormatter: abilityValueFormatter,
         },
         {
             field: 'abilities.gathering',
             headerName: t('pal.ability.gathering'),
             headerComponentParams:
                 palsTableAbilityComponentParams(GATHERING_IMAGE_TAG),
+            valueFormatter: abilityValueFormatter,
         },
         {
             field: 'abilities.generatingElectricity',
@@ -62,24 +66,28 @@ const PalsTable: FunctionComponent<PalsTableProps> = ({
             headerComponentParams: palsTableAbilityComponentParams(
                 GENERATING_ELECTRICITY_IMAGE_TAG,
             ),
+            valueFormatter: abilityValueFormatter,
         },
         {
             field: 'abilities.handiwork',
             headerName: t('pal.ability.handiwork'),
             headerComponentParams:
                 palsTableAbilityComponentParams(HANDIWORK_IMAGE_TAG),
+            valueFormatter: abilityValueFormatter,
         },
         {
             field: 'abilities.kindling',
             headerName: t('pal.ability.kindling'),
             headerComponentParams:
                 palsTableAbilityComponentParams(KINDLING_IMAGE_TAG),
+            valueFormatter: abilityValueFormatter,
         },
         {
             field: 'abilities.lumbering',
             headerName: t('pal.ability.lumbering'),
             headerComponentParams:
                 palsTableAbilityComponentParams(LUMBERING_IMAGE_TAG),
+            valueFormatter: abilityValueFormatter,
         },
         {
             field: 'abilities.medicineProduction',
@@ -87,18 +95,21 @@ const PalsTable: FunctionComponent<PalsTableProps> = ({
             headerComponentParams: palsTableAbilityComponentParams(
                 MEDICINE_PRODUCTION_IMAGE_TAG,
             ),
+            valueFormatter: abilityValueFormatter,
         },
         {
             field: 'abilities.mining',
             headerName: t('pal.ability.mining'),
             headerComponentParams:
                 palsTableAbilityComponentParams(MINING_IMAGE_TAG),
+            valueFormatter: abilityValueFormatter,
         },
         {
             field: 'abilities.planting',
             headerName: t('pal.ability.planting'),
             headerComponentParams:
                 palsTableAbilityComponentParams(PLANTING_IMAGE_TAG),
+            valueFormatter: abilityValueFormatter,
         },
         {
             field: 'abilities.transporting',
@@ -106,12 +117,14 @@ const PalsTable: FunctionComponent<PalsTableProps> = ({
             headerComponentParams: palsTableAbilityComponentParams(
                 TRANSPORTING_IMAGE_TAG,
             ),
+            valueFormatter: abilityValueFormatter,
         },
         {
             field: 'abilities.watering',
             headerName: t('pal.ability.watering'),
             headerComponentParams:
                 palsTableAbilityComponentParams(WATERING_IMAGE_TAG),
+            valueFormatter: abilityValueFormatter,
         },
     ]);
 
