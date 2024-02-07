@@ -15,6 +15,7 @@
     "name": "Javier Rodriguez Posada"
   },
   "devDependencies": {
-    "cheerio": "^1.0.0-rc.12"
+    "cheerio": "^1.0.0-rc.12",
+    "cli-progress-footer": "^2.3.2"
   }
 }
