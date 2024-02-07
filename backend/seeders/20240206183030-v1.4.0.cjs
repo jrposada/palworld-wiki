@@ -1,32 +1,7 @@
 'use strict';
 
 const { PALS_MODEL_NAME } = require('../definitions/pals.cjs');
-
-/*
-{
-    abilitiesCooling: 0,
-    abilitiesFarming: 0,
-    abilitiesGathering: 0,
-    abilitiesGeneratingElectricity: 0,
-    abilitiesHandiwork: 0,
-    abilitiesKindling: 0,
-    abilitiesLumbering: 0,
-    abilitiesMedicineProduction: 0,
-    abilitiesMining: 0,
-    abilitiesPlanting: 0,
-    abilitiesTransporting: 0,
-    abilitiesWatering: 0,
-    drops: [],
-    elements: [],
-    food: 0,
-    index: 0,
-    name: '',
-    production: [],
-
-    createdAt: new Date(),
-    updatedAt: new Date(),
-}
-*/
+const DATA = require('../seeders-data/v1.4.0.cjs');
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -41,54 +16,15 @@ module.exports = {
          *   isBetaMember: false
          * }], {});
          */
-        return queryInterface.bulkInsert(PALS_MODEL_NAME, [
-            {
-                abilitiesCooling: 0,
-                abilitiesFarming: 1,
-                abilitiesGathering: 0,
-                abilitiesGeneratingElectricity: 0,
-                abilitiesHandiwork: 1,
-                abilitiesKindling: 0,
-                abilitiesLumbering: 0,
-                abilitiesMedicineProduction: 0,
-                abilitiesMining: 0,
-                abilitiesPlanting: 0,
-                abilitiesTransporting: 1,
-                abilitiesWatering: 0,
-                drops: ['wool', 'lamballMutton'],
-                elements: ['neutral'],
-                food: 2,
-                index: 1,
-                name: 'Lamball',
-                production: ['wool'],
+        return queryInterface.bulkInsert(
+            PALS_MODEL_NAME,
+            DATA.map((item) => ({
+                ...item,
 
                 createdAt: new Date(),
                 updatedAt: new Date(),
-            },
-            {
-                abilitiesCooling: 0,
-                abilitiesFarming: 0,
-                abilitiesGathering: 1,
-                abilitiesGeneratingElectricity: 0,
-                abilitiesHandiwork: 1,
-                abilitiesKindling: 0,
-                abilitiesLumbering: 0,
-                abilitiesMedicineProduction: 0,
-                abilitiesMining: 1,
-                abilitiesPlanting: 0,
-                abilitiesTransporting: 1,
-                abilitiesWatering: 0,
-                drops: ['redBerries'],
-                elements: ['neutral'],
-                food: 2,
-                index: 2,
-                name: 'Cattiva',
-                production: null,
-
-                createdAt: new Date(),
-                updatedAt: new Date(),
-            },
-        ]);
+            })),
+        );
     },
 
     // eslint-disable-next-line no-unused-vars
