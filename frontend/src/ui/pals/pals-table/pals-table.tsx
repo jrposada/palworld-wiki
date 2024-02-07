@@ -4,6 +4,21 @@ import { t } from 'i18next';
 import { FunctionComponent, useEffect, useRef, useState } from 'react';
 import { Pal } from 'shared/models/pal';
 import PalsFilter, { PalsFilterProps } from '../pals-filter/pals-filter';
+import {
+    COOLING_IMAGE_TAG,
+    FARMING_IMAGE_TAG,
+    GATHERING_IMAGE_TAG,
+    GENERATING_ELECTRICITY_IMAGE_TAG,
+    HANDIWORK_IMAGE_TAG,
+    KINDLING_IMAGE_TAG,
+    LUMBERING_IMAGE_TAG,
+    MEDICINE_PRODUCTION_IMAGE_TAG,
+    MINING_IMAGE_TAG,
+    PLANTING_IMAGE_TAG,
+    TRANSPORTING_IMAGE_TAG,
+    WATERING_IMAGE_TAG,
+    palsTableAbilityComponentParams,
+} from './pals-table-ability-header';
 
 type PalsTableProps = {
     pals: Pal[] | undefined;
@@ -18,38 +33,86 @@ const PalsTable: FunctionComponent<PalsTableProps> = ({
     onFilterChange,
 }) => {
     const [colDefs] = useState<AgGridReactProps<Pal>['columnDefs']>([
-        { field: 'index', headerName: t('pal.table.header.index') },
+        {
+            field: 'index',
+            headerName: t('pal.table.header.index'),
+        },
         { field: 'name', headerName: t('pal.table.header.name') },
-        { field: 'abilities.cooling', headerName: t('pal.ability.cooling') },
-        { field: 'abilities.farming', headerName: t('pal.ability.farming') },
+        {
+            field: 'abilities.cooling',
+            headerName: t('pal.ability.cooling'),
+            headerComponentParams:
+                palsTableAbilityComponentParams(COOLING_IMAGE_TAG),
+        },
+        {
+            field: 'abilities.farming',
+            headerName: t('pal.ability.farming'),
+            headerComponentParams:
+                palsTableAbilityComponentParams(FARMING_IMAGE_TAG),
+        },
         {
             field: 'abilities.gathering',
             headerName: t('pal.ability.gathering'),
+            headerComponentParams:
+                palsTableAbilityComponentParams(GATHERING_IMAGE_TAG),
         },
         {
             field: 'abilities.generatingElectricity',
             headerName: t('pal.ability.generatingElectricity'),
+            headerComponentParams: palsTableAbilityComponentParams(
+                GENERATING_ELECTRICITY_IMAGE_TAG,
+            ),
         },
         {
             field: 'abilities.handiwork',
             headerName: t('pal.ability.handiwork'),
+            headerComponentParams:
+                palsTableAbilityComponentParams(HANDIWORK_IMAGE_TAG),
         },
-        { field: 'abilities.kindling', headerName: t('pal.ability.kindling') },
+        {
+            field: 'abilities.kindling',
+            headerName: t('pal.ability.kindling'),
+            headerComponentParams:
+                palsTableAbilityComponentParams(KINDLING_IMAGE_TAG),
+        },
         {
             field: 'abilities.lumbering',
             headerName: t('pal.ability.lumbering'),
+            headerComponentParams:
+                palsTableAbilityComponentParams(LUMBERING_IMAGE_TAG),
         },
         {
             field: 'abilities.medicineProduction',
             headerName: t('pal.ability.medicineProduction'),
+            headerComponentParams: palsTableAbilityComponentParams(
+                MEDICINE_PRODUCTION_IMAGE_TAG,
+            ),
         },
-        { field: 'abilities.mining', headerName: t('pal.ability.mining') },
-        { field: 'abilities.planting', headerName: t('pal.ability.planting') },
+        {
+            field: 'abilities.mining',
+            headerName: t('pal.ability.mining'),
+            headerComponentParams:
+                palsTableAbilityComponentParams(MINING_IMAGE_TAG),
+        },
+        {
+            field: 'abilities.planting',
+            headerName: t('pal.ability.planting'),
+            headerComponentParams:
+                palsTableAbilityComponentParams(PLANTING_IMAGE_TAG),
+        },
         {
             field: 'abilities.transporting',
             headerName: t('pal.ability.transporting'),
+            headerComponentParams: palsTableAbilityComponentParams(
+                TRANSPORTING_IMAGE_TAG,
+            ),
         },
-        { field: 'abilities.watering', headerName: t('pal.ability.watering') },
+        {
+            field: 'abilities.watering',
+            headerName: t('pal.ability.watering'),
+            headerComponentParams:
+                palsTableAbilityComponentParams(WATERING_IMAGE_TAG),
+        },
     ]);
 
     const [abilityFilterState, setAbilityFilterState] = useState<

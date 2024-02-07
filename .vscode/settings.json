@@ -14,7 +14,8 @@
     "palworld",
     "postbuild",
     "roboto",
-    "tanstack"
+    "tanstack",
+    "webp"
   ],
   "typescript.tsdk": "node_modules/typescript/lib"
 }
