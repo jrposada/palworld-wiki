@@ -1,5 +1,6 @@
 import * as cheerio from 'cheerio';
 import { Logger } from './logger.js';
+import { toCamelCase } from './utils.js';
 
 async function main() {
     const logger = new Logger();
@@ -21,7 +22,7 @@ async function main() {
     logger.log();
 
     const pagesResponses = await Promise.all(
-        index.slice(0, 2).map((link) => fetch(`${baseUrl}${link}`)),
+        index.slice(8, 10).map((link) => fetch(`${baseUrl}${link}`)),
     );
     const pagesHtmls = await Promise.all(
         pagesResponses.map((response) => response.text()),
@@ -39,6 +40,13 @@ async function main() {
                 .text()
                 .trim()
                 .slice(1),
+        );
+
+        const elements = [];
+        $page('[data-source="ele1"] div.pi-data-value span').each(
+            (_, element) => {
+                elements.push(toCamelCase($page(element).text()));
+            },
         );
 
         let food = 0;
@@ -78,11 +86,8 @@ async function main() {
             .next()
             .find('li')
             .each((_, element) => {
-                const dropPascalCase = $page(element).text().replace(/\s/g, '');
-                const dropCamelCase =
-                    dropPascalCase.charAt(0).toLowerCase() +
-                    dropPascalCase.slice(1);
-                drops.push(dropCamelCase);
+                const drop = toCamelCase($page(element).text());
+                drops.push(drop);
             });
 
         const production = [];
@@ -90,13 +95,8 @@ async function main() {
             .next()
             .find('li')
             .each((_, element) => {
-                const productionPascalCase = $page(element)
-                    .text()
-                    .replace(/\s/g, '');
-                const productionCamelCase =
-                    productionPascalCase.charAt(0).toLowerCase() +
-                    productionPascalCase.slice(1);
-                production.push(productionCamelCase);
+                const value = toCamelCase($page(element).text());
+                production.push(value);
             });
 
         pals.push({
@@ -114,7 +114,7 @@ async function main() {
             abilitiesTransporting: abilities.abilitiesTransporting,
             abilitiesWatering: abilities.abilitiesWatering,
             drops,
-            elements: '', // todo
+            elements,
             food,
             index,
             name,
