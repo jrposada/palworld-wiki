@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import { Container, Grid } from '@mui/material';
 import { AgGridReact, AgGridReactProps } from 'ag-grid-react';
 import { t } from 'i18next';
 import { FunctionComponent, useEffect, useRef, useState } from 'react';
@@ -87,8 +87,16 @@ const PalsTable: FunctionComponent<PalsTableProps> = ({
     }, [abilityFilterState, dropFilterState]);
 
     return (
-        <Grid container spacing={3}>
-            <Grid item xs={12}>
+        <Container
+            maxWidth={false}
+            sx={{
+                flexGrow: 1,
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '1rem',
+            }}
+        >
+            <Grid item>
                 <PalsFilter
                     abilitySetState={setAbilityFilterState}
                     abilityState={abilityFilterState}
@@ -96,12 +104,12 @@ const PalsTable: FunctionComponent<PalsTableProps> = ({
                     dropState={dropFilterState}
                 />
             </Grid>
-            <Grid item xs={12}>
-                <div className="ag-theme-quartz" style={{ height: 500 }}>
+            <Grid item sx={{ flexGrow: 1 }}>
+                <div className="ag-theme-quartz" style={{ height: '100%' }}>
                     <AgGridReact<Pal> rowData={pals} columnDefs={colDefs} />
                 </div>
             </Grid>
-        </Grid>
+        </Container>
     );
 };
 

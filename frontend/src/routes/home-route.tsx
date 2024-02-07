@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import { Container } from '@mui/material';
 import { FunctionComponent, useState } from 'react';
 import { Arguments } from 'shared/utils/arguments';
 import { useGetPals } from '../core/api/get-pals/get-pals';
@@ -16,11 +16,18 @@ const HomeRoute: FunctionComponent = () => {
     };
 
     return (
-        <Grid container spacing={3}>
-            <Grid item xs={12}>
-                <PalsTable pals={data} onFilterChange={handleFilterChange} />
-            </Grid>
-        </Grid>
+        <Container
+            maxWidth={false}
+            sx={{
+                mt: 4,
+                mb: 4,
+                flexGrow: 1,
+                display: 'flex',
+                flexDirection: 'column',
+            }}
+        >
+            <PalsTable pals={data} onFilterChange={handleFilterChange} />
+        </Container>
     );
 };
 

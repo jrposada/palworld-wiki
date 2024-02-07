@@ -90,10 +90,21 @@ const AppLayout: React.FunctionComponent = () => {
                     flexGrow: 1,
                     height: '100vh',
                     overflow: 'auto',
+                    display: 'flex',
+                    flexDirection: 'column',
                 }}
             >
                 <Toolbar />
-                <Container maxWidth={false} sx={{ mt: 4, mb: 4 }}>
+                <Container
+                    maxWidth={false}
+                    sx={{
+                        mt: 4,
+                        mb: 4,
+                        flexGrow: 1,
+                        display: 'flex',
+                        flexDirection: 'column',
+                    }}
+                >
                     <Outlet />
                     <Suspense>
                         <TanStackRouterDevtools />
