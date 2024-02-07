@@ -16,16 +16,18 @@ async function main() {
     const html = await (await fetch(indexUrl)).text();
     const $ = cheerio.load(html);
 
+    logger.log('Searching pals...');
+
     const index = [];
     $('table.fandom-table tbody tr td:nth-child(3)').each((_, element) => {
         const href = $(element).find('a').attr('href');
         if (href) {
-            logger.log(`Link found: ${href}`);
             index.push(href);
+            progressLogger.updateProgress(`Link found: ${href}`);
         }
     });
 
-    logger.log();
+    logger.log(`Found ${index.length} pals`);
 
     const pagesResponses = [];
     let i = 0;
