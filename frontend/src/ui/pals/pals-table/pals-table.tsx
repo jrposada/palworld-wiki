@@ -4,7 +4,7 @@ import { t } from 'i18next';
 import { FunctionComponent, useEffect, useRef, useState } from 'react';
 import { Pal } from 'shared/models/pal';
 import PalsFilter, { PalsFilterProps } from '../pals-filter/pals-filter';
-import { dropsValueFormatter } from './drops-value-formatter';
+import { dropsValueGetter } from './drops-value-getter';
 import { emptyValueFormatter } from './empty-value-formatter';
 import {
     COOLING_IMAGE_TAG,
@@ -46,7 +46,7 @@ const PalsTable: FunctionComponent<PalsTableProps> = ({
         {
             field: 'drops',
             headerName: t('pal.drops'),
-            valueFormatter: dropsValueFormatter,
+            valueGetter: dropsValueGetter,
             filter: 'agSetColumnFilter',
         },
         {
