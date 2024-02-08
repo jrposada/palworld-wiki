@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 
-export function generateData(data) {
+export function generateData(data, allDrops) {
     const now = new Date();
     const content = [
         '/*',
@@ -44,4 +44,6 @@ export function generateData(data) {
     content.push('];', '', 'module.exports = data');
 
     fs.writeFileSync('../backend/seeders-data/v1.4.0.cjs', content.join('\n'));
+
+    fs.writeFileSync('./drops.log', Array.from(allDrops).sort().join('\n'));
 }

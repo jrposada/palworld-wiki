@@ -67,6 +67,7 @@ async function main() {
 
     logger.log('Scrapping pals data...');
 
+    const allDrops = new Set();
     const pals = [];
     pagesHtmls.forEach((pageHtml, i) => {
         const $page = cheerio.load(pageHtml);
@@ -125,8 +126,15 @@ async function main() {
             .next()
             .find('li')
             .each((_, element) => {
-                const drop = toCamelCase($page(element).text());
+                const text = $page(element).text();
+                if (text.startsWith('Normal') || text.startsWith('Boss')) {
+                    return;
+                }
+
+                const drop = toCamelCase(text);
+                logger.log(`Drop found ${drop}`);
                 drops.push(drop);
+                allDrops.add(`"${drop}": "${text.trim()}",`);
             });
 
         const production = [];
@@ -165,9 +173,9 @@ async function main() {
     });
     progressLogger.updateProgress();
 
-    logger.log(`Found data of ${pals.length} pals`);
+    logger.log(`Found data of ${pals.length} pals and ${allDrops.size} drops`);
 
-    generateData(pals);
+    generateData(pals, allDrops);
     process.exit(0);
 }
 
