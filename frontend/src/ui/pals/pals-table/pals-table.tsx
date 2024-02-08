@@ -155,6 +155,10 @@ const PalsTable: FunctionComponent<PalsTableProps> = ({
         watering: false,
     });
 
+    const autoSizeStrategy: AgGridReactProps<Pal>['autoSizeStrategy'] = {
+        type: 'fitCellContents',
+    };
+
     const [context] = useState({ t });
 
     const handleFilterChange = useRef(onFilterChange);
@@ -184,9 +188,10 @@ const PalsTable: FunctionComponent<PalsTableProps> = ({
             <Grid item sx={{ flexGrow: 1 }}>
                 <div className="ag-theme-quartz" style={{ height: '100%' }}>
                     <AgGridReact<Pal>
+                        autoSizeStrategy={autoSizeStrategy}
+                        columnDefs={colDefs}
                         context={context}
                         rowData={pals}
-                        columnDefs={colDefs}
                     />
                 </div>
             </Grid>
