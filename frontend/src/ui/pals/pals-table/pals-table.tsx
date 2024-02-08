@@ -4,6 +4,7 @@ import { t } from 'i18next';
 import { FunctionComponent, useEffect, useRef, useState } from 'react';
 import { Pal } from 'shared/models/pal';
 import PalsFilter, { PalsFilterProps } from '../pals-filter/pals-filter';
+import { dropsValueFormatter } from './drops-value-formatter';
 import { emptyValueFormatter } from './empty-value-formatter';
 import {
     COOLING_IMAGE_TAG,
@@ -41,6 +42,12 @@ const PalsTable: FunctionComponent<PalsTableProps> = ({
             field: 'name',
             headerName: t('pal.table.header.name'),
             filter: 'agTextColumnFilter',
+        },
+        {
+            field: 'drops',
+            headerName: t('pal.drops'),
+            valueFormatter: dropsValueFormatter,
+            filter: 'agSetColumnFilter',
         },
         {
             field: 'abilities.cooling',
@@ -129,11 +136,6 @@ const PalsTable: FunctionComponent<PalsTableProps> = ({
                 palsTableAbilityComponentParams(WATERING_IMAGE_TAG),
             valueFormatter: emptyValueFormatter,
         },
-        {
-            field: 'drops',
-            headerName: t('pal.drops'),
-            valueFormatter: emptyValueFormatter,
-        },
     ]);
 
     const [abilityFilterState, setAbilityFilterState] = useState<
@@ -152,6 +154,8 @@ const PalsTable: FunctionComponent<PalsTableProps> = ({
         transporting: false,
         watering: false,
     });
+
+    const [context] = useState({ t });
 
     const handleFilterChange = useRef(onFilterChange);
 
@@ -179,7 +183,11 @@ const PalsTable: FunctionComponent<PalsTableProps> = ({
             </Grid>
             <Grid item sx={{ flexGrow: 1 }}>
                 <div className="ag-theme-quartz" style={{ height: '100%' }}>
-                    <AgGridReact<Pal> rowData={pals} columnDefs={colDefs} />
+                    <AgGridReact<Pal>
+                        context={context}
+                        rowData={pals}
+                        columnDefs={colDefs}
+                    />
                 </div>
             </Grid>
         </Container>
