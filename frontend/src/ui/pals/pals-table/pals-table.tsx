@@ -25,7 +25,6 @@ type PalsTableProps = {
     pals: Pal[] | undefined;
     onFilterChange: (filter: {
         ability: PalsFilterProps['abilityState'];
-        drop: PalsFilterProps['dropState'];
     }) => void;
 };
 
@@ -154,22 +153,13 @@ const PalsTable: FunctionComponent<PalsTableProps> = ({
         watering: false,
     });
 
-    const [dropFilterState, setDropFilterState] = useState<
-        PalsFilterProps['dropState']
-    >({
-        bone: false,
-        innovativeTechnicalManual: false,
-        largePalSoul: false,
-    });
-
     const handleFilterChange = useRef(onFilterChange);
 
     useEffect(() => {
         handleFilterChange.current({
             ability: abilityFilterState,
-            drop: dropFilterState,
         });
-    }, [abilityFilterState, dropFilterState]);
+    }, [abilityFilterState]);
 
     return (
         <Container
@@ -185,8 +175,6 @@ const PalsTable: FunctionComponent<PalsTableProps> = ({
                 <PalsFilter
                     abilitySetState={setAbilityFilterState}
                     abilityState={abilityFilterState}
-                    dropSetState={setDropFilterState}
-                    dropState={dropFilterState}
                 />
             </Grid>
             <Grid item sx={{ flexGrow: 1 }}>

@@ -7,7 +7,7 @@ import PalsTable, { PalsTableProps } from '../ui/pals/pals-table/pals-table';
 const HomeRoute: FunctionComponent = () => {
     const [filter, setFilter] = useState<
         Arguments<typeof useGetPals>['0']['filter']
-    >({ ability: {}, drop: {} });
+    >({ ability: {} });
 
     const { data } = useGetPals({ filter });
 

@@ -2,21 +2,13 @@ import { Grid } from '@mui/material';
 import PalsAbilityFilter, {
     PalsAbilityFilterProps,
 } from './pals-ability-filter';
-import PalsDropFilter, { PalsDropFilterProps } from './pals-drop-filter';
 
 type PalsFilterProps = {
     abilitySetState: PalsAbilityFilterProps['setState'];
     abilityState: PalsAbilityFilterProps['state'];
-    dropSetState: PalsDropFilterProps['setState'];
-    dropState: PalsDropFilterProps['state'];
 };
 
-function PalsFilter({
-    abilitySetState,
-    abilityState,
-    dropSetState,
-    dropState,
-}: PalsFilterProps) {
+function PalsFilter({ abilitySetState, abilityState }: PalsFilterProps) {
     return (
         <Grid container spacing={2}>
             <Grid item>
@@ -25,9 +17,7 @@ function PalsFilter({
                     state={abilityState}
                 />
             </Grid>
-            <Grid item>
-                <PalsDropFilter setState={dropSetState} state={dropState} />
-            </Grid>
+            <Grid item></Grid>
         </Grid>
     );
 }
