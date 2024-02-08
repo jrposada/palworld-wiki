@@ -18,9 +18,12 @@ type PalDao = {
     abilitiesPlanting: number;
     abilitiesTransporting: number;
     abilitiesWatering: number;
+    drops: string[] | null;
+    elements: string[] | null;
     food: number;
     index: string;
     name: string;
+    production: string[] | null;
 };
 
 export function palDao(sequelize: Sequelize) {
@@ -44,9 +47,12 @@ export function toPalDao(pal: Pal): PalDao {
         abilitiesPlanting: pal.abilities.planting,
         abilitiesTransporting: pal.abilities.transporting,
         abilitiesWatering: pal.abilities.watering,
+        drops: (pal.drops.length && pal.drops) || null,
+        elements: (pal.elements.length && pal.elements) || null,
         food: pal.food,
         index: pal.index,
         name: pal.name,
+        production: (pal.production.length && pal.production) || null,
     };
 }
 
@@ -68,10 +74,13 @@ export function toPalEntity(model: Model): PalEntity {
             watering: palDao.abilitiesWatering,
         },
         createdAt: palDao.createdAt,
+        drops: palDao.drops ?? [],
+        elements: palDao.elements ?? [],
         food: palDao.food,
         id: palDao.id,
         index: palDao.index,
         name: palDao.name,
+        production: palDao.production ?? [],
         updatedAt: palDao.updatedAt,
     };
 }
@@ -92,9 +101,12 @@ export const PAL_DAO_MAPPER: Partial<
     'abilities.transporting': 'abilitiesTransporting',
     'abilities.watering': 'abilitiesWatering',
     createdAt: 'createdAt',
+    drops: 'drops',
+    elements: 'elements',
     food: 'food',
     id: 'id',
     index: 'index',
     name: 'name',
+    production: 'production',
     updatedAt: 'updatedAt',
 };
