@@ -12,7 +12,8 @@ import {
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Outlet } from '@tanstack/react-router';
 import { t } from 'i18next';
-import { Suspense, lazy, useState } from 'react';
+import { Suspense, lazy } from 'react';
+import { useLocalStorage } from '../../core/hooks/use-local-storage/use-local-storage';
 import AppBar from './app-bar';
 import AppDrawer from './app-drawer';
 import { navigationItems } from './navigation-items';
@@ -28,7 +29,7 @@ const TanStackRouterDevtools =
           );
 
 const AppLayout: React.FunctionComponent = () => {
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useLocalStorage('navigation-menu:open', true);
     const toggleDrawer = () => {
         setOpen(!open);
     };
