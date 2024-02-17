@@ -15,19 +15,5 @@ export const navigationItems = (
                 <ListItemText primary={t('home')} />
             </ListItemButton>
         </Link>
-        <Link to="/about">
-            <ListItemButton>
-                <ListItemIcon>
-                    <HomeIcon />
-                </ListItemIcon>
-                <ListItemText primary="about" />
-            </ListItemButton>
-        </Link>
-
-        {/* <Divider sx={{ my: 1 }} /> */}
-
-        {/* <ListSubheader component="div" inset>
-            Saved reports
-        </ListSubheader> */}
     </>
 );
