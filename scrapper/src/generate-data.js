@@ -17,6 +17,8 @@ export function generateData(data, allDrops) {
     ];
 
     data.forEach((pal) => {
+        if (!pal) return;
+
         content.push(
             '    {',
             `        abilitiesCooling: ${pal.abilitiesCooling},`,
@@ -37,6 +39,7 @@ export function generateData(data, allDrops) {
             `        index: "${pal.index}",`,
             `        name: "${pal.name}",`,
             `        production: ${(pal.production.length > 0 && JSON.stringify(pal.production)) || 'null'},`,
+            `        link: "${pal.link}",`,
             '    },',
         );
     });
