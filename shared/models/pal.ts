@@ -7,6 +7,7 @@ export type Pal = {
     elements: string[];
     food: number;
     index: string;
+    link: string;
     name: string;
     production: string[];
 };

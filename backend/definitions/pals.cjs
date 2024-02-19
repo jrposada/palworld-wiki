@@ -72,6 +72,10 @@ module.exports = {
             type: DataTypes.STRING,
             unique: true,
         },
+        link: {
+            allowNull: false,
+            type: DataTypes.STRING,
+        },
         name: {
             allowNull: false,
             type: DataTypes.STRING,

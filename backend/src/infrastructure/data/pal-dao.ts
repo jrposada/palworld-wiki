@@ -23,6 +23,7 @@ type PalDao = {
     elements: string[] | null;
     food: number;
     index: string;
+    link: string;
     name: string;
     production: string[] | null;
 };
@@ -53,6 +54,7 @@ export function toPalDao(pal: Pal): PalDao {
         elements: (pal.elements.length && pal.elements) || null,
         food: pal.food,
         index: pal.index,
+        link: pal.link,
         name: pal.name,
         production: (pal.production.length && pal.production) || null,
     };
@@ -82,6 +84,7 @@ export function toPalEntity(model: Model): PalEntity {
         food: palDao.food,
         id: palDao.id,
         index: palDao.index,
+        link: palDao.link,
         name: palDao.name,
         production: palDao.production ?? [],
         updatedAt: palDao.updatedAt,
@@ -110,6 +113,7 @@ export const PAL_DAO_MAPPER: Partial<
     food: 'food',
     id: 'id',
     index: 'index',
+    link: 'link',
     name: 'name',
     production: 'production',
     updatedAt: 'updatedAt',

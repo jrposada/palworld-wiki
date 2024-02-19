@@ -26,7 +26,9 @@
 
 ## Database migrations
 
-TODO
+```shell
+npm --workspace=backend run db:reset
+```
 
 ## How to deploy
 
