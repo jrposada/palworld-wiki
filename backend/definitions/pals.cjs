@@ -51,7 +51,11 @@ module.exports = {
             allowNull: false,
             type: DataTypes.INTEGER,
         },
-        drops: {
+        dropsBoss: {
+            allowNull: true,
+            type: DataTypes.ARRAY(DataTypes.STRING),
+        },
+        dropsNormal: {
             allowNull: true,
             type: DataTypes.ARRAY(DataTypes.STRING),
         },

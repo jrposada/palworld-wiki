@@ -53,21 +53,79 @@ export async function scrapPalPage(url, allDrops) {
             abilities[`abilities${ability}`] = parseInt(value);
         });
 
-    const drops = [];
-    $('p:contains("Possible Drops:")')
+    const possibleDrops = $('p:contains("Possible Drops:")');
+    const dropsNormal = [];
+    possibleDrops
         .next()
-        .find('li')
+        .find('li:contains("Normal") ul li')
         .each((_, element) => {
             const text = $(element).text();
-            if (text.startsWith('Normal') || text.startsWith('Boss')) {
-                return;
-            }
 
             const drop = toCamelCase(text);
-            logger.log(`Drop found ${drop}`);
-            drops.push(drop);
+            logger.log(`Normal drop found ${drop}`);
+            dropsNormal.push(drop);
             allDrops.add(`"${drop}": "${text.trim()}",`);
         });
+    if (!dropsNormal.length) {
+        logger.log('No normal drops. Trying workaround...');
+        possibleDrops
+            .next()
+            .next()
+            .find('li')
+            .first()
+            .find('ul li')
+            .each((_, element) => {
+                const text = $(element).text();
+
+                const drop = toCamelCase(text);
+                logger.log(`Normal drop found ${drop}`);
+                dropsNormal.push(drop);
+                allDrops.add(`"${drop}": "${text.trim()}",`);
+            });
+    }
+
+    const dropsBoss = [];
+    possibleDrops
+        .next()
+        .find('li:contains("Boss") ul li')
+        .each((_, element) => {
+            const text = $(element).text();
+
+            const drop = toCamelCase(text);
+            logger.log(`Boss drop found ${drop}`);
+            dropsBoss.push(drop);
+            allDrops.add(`"${drop}": "${text.trim()}",`);
+        });
+    if (!dropsBoss.length) {
+        logger.log('No boss drops. Trying workaround...');
+        possibleDrops
+            .next()
+            .next()
+            .find('li:contains("Boss") ul li')
+            .each((_, element) => {
+                const text = $(element).text();
+
+                const drop = toCamelCase(text);
+                logger.log(`Boss drop found ${drop}`);
+                dropsBoss.push(drop);
+                allDrops.add(`"${drop}": "${text.trim()}",`);
+            });
+    }
+
+    if (!dropsNormal.length && !dropsBoss.length) {
+        logger.log('No normal or boss drops. Trying workaround 2...');
+        possibleDrops
+            .next()
+            .find('li')
+            .each((_, element) => {
+                const text = $(element).text();
+
+                const drop = toCamelCase(text);
+                logger.log(`Normal drop found ${drop}`);
+                dropsNormal.push(drop);
+                allDrops.add(`"${drop}": "${text.trim()}",`);
+            });
+    }
 
     const production = [];
     $('p:contains("Farming Produce")')
@@ -93,7 +151,8 @@ export async function scrapPalPage(url, allDrops) {
             abilitiesPlanting: abilities.abilitiesPlanting,
             abilitiesTransporting: abilities.abilitiesTransporting,
             abilitiesWatering: abilities.abilitiesWatering,
-            drops,
+            dropsBoss,
+            dropsNormal,
             elements,
             food,
             index,

@@ -18,7 +18,8 @@ type PalDao = {
     abilitiesPlanting: number;
     abilitiesTransporting: number;
     abilitiesWatering: number;
-    drops: string[] | null;
+    dropsBoss: string[] | null;
+    dropsNormal: string[] | null;
     elements: string[] | null;
     food: number;
     index: string;
@@ -47,7 +48,8 @@ export function toPalDao(pal: Pal): PalDao {
         abilitiesPlanting: pal.abilities.planting,
         abilitiesTransporting: pal.abilities.transporting,
         abilitiesWatering: pal.abilities.watering,
-        drops: (pal.drops.length && pal.drops) || null,
+        dropsBoss: (pal.dropsBoss.length && pal.dropsBoss) || null,
+        dropsNormal: (pal.dropsNormal.length && pal.dropsNormal) || null,
         elements: (pal.elements.length && pal.elements) || null,
         food: pal.food,
         index: pal.index,
@@ -74,7 +76,8 @@ export function toPalEntity(model: Model): PalEntity {
             watering: palDao.abilitiesWatering,
         },
         createdAt: palDao.createdAt,
-        drops: palDao.drops ?? [],
+        dropsBoss: palDao.dropsBoss ?? [],
+        dropsNormal: palDao.dropsNormal ?? [],
         elements: palDao.elements ?? [],
         food: palDao.food,
         id: palDao.id,
@@ -101,7 +104,8 @@ export const PAL_DAO_MAPPER: Partial<
     'abilities.transporting': 'abilitiesTransporting',
     'abilities.watering': 'abilitiesWatering',
     createdAt: 'createdAt',
-    drops: 'drops',
+    dropsBoss: 'dropsBoss',
+    dropsNormal: 'dropsNormal',
     elements: 'elements',
     food: 'food',
     id: 'id',

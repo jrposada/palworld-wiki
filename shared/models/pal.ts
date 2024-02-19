@@ -2,7 +2,8 @@ import { Entity } from './entity.js';
 
 export type Pal = {
     abilities: Abilities;
-    drops: string[];
+    dropsBoss: string[];
+    dropsNormal: string[];
     elements: string[];
     food: number;
     index: string;

@@ -22,10 +22,12 @@ async function main() {
     const allDrops = new Set();
 
     const pals = await batch(
-        index.map(
-            (link) => async () =>
-                scrapPalPage(`${baseUrl}${link}`, allDrops, baseUrl),
-        ),
+        index
+            // .slice(16, 17)
+            .map(
+                (link) => async () =>
+                    scrapPalPage(`${baseUrl}${link}`, allDrops, baseUrl),
+            ),
         {
             maxDelayMs: maxDelayBetweenBatchesMs,
             minDelayMs: minDelayBetweenBatchesMs,
