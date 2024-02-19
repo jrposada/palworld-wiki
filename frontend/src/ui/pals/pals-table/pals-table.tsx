@@ -1,11 +1,13 @@
 import { Container, Grid } from '@mui/material';
 import { AgGridReact, AgGridReactProps } from 'ag-grid-react';
 import { t } from 'i18next';
-import { FunctionComponent, useEffect, useRef, useState } from 'react';
+import { FunctionComponent, useEffect, useMemo, useRef, useState } from 'react';
 import { Pal } from 'shared/models/pal';
 import PalsFilter, { PalsFilterProps } from '../pals-filter/pals-filter';
-import { dropsValueGetter } from './drops-value-getter';
+import { dropsBossValueGetter } from './drops-boss-value-getter';
+import { dropsNormalValueGetter } from './drops-normal-value-getter';
 import { emptyValueFormatter } from './empty-value-formatter';
+import { PalNameCellRenderer } from './pal-name-cell-renderer';
 import {
     COOLING_IMAGE_TAG,
     FARMING_IMAGE_TAG,
@@ -33,6 +35,13 @@ const PalsTable: FunctionComponent<PalsTableProps> = ({
     pals,
     onFilterChange,
 }) => {
+    const components = useMemo(
+        () => ({
+            palNameCellRenderer: PalNameCellRenderer,
+        }),
+        [],
+    );
+
     const [colDefs] = useState<AgGridReactProps<Pal>['columnDefs']>([
         {
             field: 'index',
@@ -42,11 +51,18 @@ const PalsTable: FunctionComponent<PalsTableProps> = ({
             field: 'name',
             headerName: t('pal.table.header.name'),
             filter: 'agTextColumnFilter',
+            cellRenderer: 'palNameCellRenderer',
         },
         {
-            field: 'drops',
-            headerName: t('pal.drops'),
-            valueGetter: dropsValueGetter,
+            field: 'dropsNormal',
+            headerName: t('pal.dropsNormal'),
+            valueGetter: dropsNormalValueGetter,
+            filter: 'agSetColumnFilter',
+        },
+        {
+            field: 'dropsBoss',
+            headerName: t('pal.dropsBoss'),
+            valueGetter: dropsBossValueGetter,
             filter: 'agSetColumnFilter',
         },
         {
@@ -190,6 +206,7 @@ const PalsTable: FunctionComponent<PalsTableProps> = ({
                     <AgGridReact<Pal>
                         autoSizeStrategy={autoSizeStrategy}
                         columnDefs={colDefs}
+                        components={components}
                         context={context}
                         rowData={pals}
                     />

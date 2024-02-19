@@ -103,7 +103,8 @@
         "wheatSeeds": "Wheat Seeds",
         "wool": "Wool"
       },
-      "drops": "Drops",
+      "dropsBoss": "Boss Drops",
+      "dropsNormal": "Normal Drops",
       "filter": {
         "ability": "Work Suitability",
         "drop": "Drop"
